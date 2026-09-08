@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+
+@source '../js/**/*.{ts,tsx}';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+    --font-sans: 'Roboto Condensed', ui-sans-serif, system-ui, sans-serif;
+
+    /* IPM-ийн лого цэнхэрт (#164a9c) тааруулсан гүн, албан ёсны цэнхэр */
+    --color-brand-50: #eef3fb;
+    --color-brand-100: #d5e3f4;
+    --color-brand-200: #adc7e8;
+    --color-brand-300: #7ea5d7;
+    --color-brand-400: #4c7ec1;
+    --color-brand-500: #2b60ab;
+    --color-brand-600: #1f4e93;
+    --color-brand-700: #1a417b;
+    --color-brand-800: #183a6a;
+    --color-brand-900: #14315a;
+    --color-brand-950: #0d2140;
+
+    --color-ink: #1a1f27;
+    --color-ink-soft: #5a6474;
+
+    /* IPM / сүлдний алтан аялгуу */
+    --color-accent: #b98f3f;
+    --color-accent-soft: #d9b978;
+
+    --radius-card: 0.875rem;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        font-size: 16.5px;
+    }
+
+    body {
+        @apply bg-white text-ink-soft antialiased;
+        font-family: var(--font-sans);
+        letter-spacing: 0.01em;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply text-ink font-bold;
+        letter-spacing: -0.005em;
+    }
+
+    ::selection {
+        @apply bg-accent/25;
+    }
+}
+
+/* Дэлгэрэнгүй хэсгийн хажуугийн алтан зураас бүхий гарчиг */
+.eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-accent;
+}
+.eyebrow::before {
+    content: '';
+    @apply block h-px w-6 bg-accent;
+}
+
+/* Rich text (Filament RichEditor output) */
+.prose-cms {
+    @apply flex flex-col gap-3 text-[0.95rem] leading-relaxed text-ink;
+}
+.prose-cms h2 { @apply text-xl mt-3; }
+.prose-cms h3 { @apply text-lg mt-2; }
+.prose-cms h4 { @apply text-base mt-2; }
+.prose-cms strong { @apply font-bold text-ink; }
+.prose-cms a { @apply text-brand-600 underline underline-offset-2; }
+.prose-cms ul { @apply list-disc pl-5 flex flex-col gap-1; }
+.prose-cms ol { @apply list-decimal pl-5 flex flex-col gap-1; }
+.prose-cms hr { @apply my-5 border-black/10; }
+.prose-cms img { @apply rounded-lg max-w-full; }
+.prose-cms blockquote { @apply border-l-4 border-brand-200 pl-4 italic text-ink-soft; }

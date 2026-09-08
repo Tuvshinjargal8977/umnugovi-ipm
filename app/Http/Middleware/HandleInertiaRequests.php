@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Illuminate\Http\Request;
+use Inertia\Middleware;
+
+class HandleInertiaRequests extends Middleware
+{
+    protected $rootView = 'app';
+
+    public function version(Request $request): ?string
+    {
+        return parent::version($request);
+    }
+
+    public function share(Request $request): array
+    {
+        return [
+            ...parent::share($request),
+
+            'site' => [
+                'name' => 'Өмнөговь аймгийн төслийн удирдлагын газар',
+                'nameShort' => 'IPM',
+                'emblem' => '/images/emblem.svg',       // Өмнөговь аймгийн сүлд (түр орлуулагч — .png-ээр солиж болно)
+                'logo' => '/images/ipm-logo.svg',       // IPM wordmark
+                'phone' => '(+976) 7053-0000',
+                'email' => 'info@umnugovi-pmo.mn',
+                'address' => 'Даланзадгад сум, Өмнөговь аймаг, Монгол Улс',
+                'facebook' => null,
+                'mapEmbed' => 'https://maps.google.com/maps?q=43.5708,104.4250&hl=mn&z=13&output=embed',
+                'heroImage' => 'https://cdn.greensoft.mn/uploads/users/45/images/1_26.jpg',
+            ],
+
+            'nav' => [
+                ['label' => 'Бидний тухай', 'children' => [
+                    ['label' => 'Мэндчилгээ', 'url' => '/greeting'],
+                    ['label' => 'Танилцуулга', 'url' => '/about-us'],
+                    ['label' => 'Алсын хараа, эрхэм зорилго', 'url' => '/vision-mission'],
+                    ['label' => 'Чиг үүрэг', 'url' => '/mandate'],
+                    ['label' => 'Бүтэц, зохион байгуулалт', 'url' => '/structure'],
+                ]],
+                ['label' => 'Хууль, эрх зүй', 'children' => [
+                    ['label' => 'Хууль, эрх зүй', 'url' => '/laws'],
+                    ['label' => 'Дүрэм, журам', 'url' => '/rules'],
+                    ['label' => 'Түншлэлийн тухай хууль', 'url' => 'https://legalinfo.mn'],
+                ]],
+                ['label' => 'Мэдээлэл', 'children' => [
+                    ['label' => 'Мэдээ мэдээлэл', 'url' => '/posts'],
+                    ['label' => 'Арга хэмжээ', 'url' => '/posts?category=arga-khemjee'],
+                    ['label' => 'Зарлал', 'url' => '/posts?category=zarlal'],
+                    ['label' => 'Орон нутаг', 'url' => '/posts?category=oron-nutag'],
+                ]],
+                ['label' => 'Ил тод байдал', 'children' => [
+                    ['label' => 'Төслийн нэгдсэн сан', 'url' => '/projects'],
+                    ['label' => 'Хүний нөөцийн ил тод байдал', 'url' => '/hr-transparency'],
+                    ['label' => 'Сонгон шалгаруулалт', 'url' => '/posts?category=songon-shalgaruulalt'],
+                    ['label' => 'Шилэн данс', 'url' => 'https://shilendans.gov.mn'],
+                ]],
+                ['label' => 'Төслүүд', 'children' => [
+                    ['label' => 'Бүх төслүүд', 'url' => '/projects'],
+                    ['label' => 'Санал авч буй', 'url' => '/projects?status=open_for_proposals'],
+                    ['label' => 'Урьдчилсан үнэлгээ хийгдсэн', 'url' => '/projects?status=pre_assessment'],
+                    ['label' => 'Судлагдаж буй', 'url' => '/projects?status=under_study'],
+                    ['label' => 'Түншлэлийн төслийн үе шат', 'url' => '/projects'],
+                ]],
+                ['label' => 'Түгээмэл асуулт', 'url' => '/faq'],
+                ['label' => 'Холбоо барих', 'url' => '/contact-us'],
+            ],
+
+            'locale' => app()->getLocale(),
+            'locales' => \App\Http\Middleware\SetLocale::SUPPORTED,
+
+            'flash' => [
+                'success' => fn () => $request->hasSession() && $request->session()->get('contact_sent')
+                    ? 'Таны хүсэлт амжилттай илгээгдлээ. Баярлалаа!'
+                    : null,
+            ],
+        ];
+    }
+}
