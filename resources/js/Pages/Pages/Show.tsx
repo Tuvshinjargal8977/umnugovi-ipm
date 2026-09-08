@@ -1,5 +1,6 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 
 interface Sibling {
@@ -17,7 +18,7 @@ export default function Show({
 }) {
     return (
         <>
-            <Head title={page.title} />
+            <Seo title={page.title} description={page.body || undefined} image={page.cover} type="article" />
             <PageHero
                 eyebrow="Мэдээлэл"
                 title={page.title}

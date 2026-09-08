@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b60ab"/>
+      <stop offset="1" stop-color="#14315a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#pg)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2">
+    <circle cx="400" cy="250" r="120"/>
+    <circle cx="400" cy="250" r="90"/>
+  </g>
+  <path d="M340 300 L385 235 L420 275 L455 215 L500 300 Z" fill="#ffffff" fill-opacity="0.16"/>
+  <text x="400" y="360" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-weight="700" font-size="30" letter-spacing="4" fill="#ffffff" fill-opacity="0.55">IPM</text>
+</svg>

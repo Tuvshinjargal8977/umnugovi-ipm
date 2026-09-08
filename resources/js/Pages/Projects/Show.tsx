@@ -1,12 +1,12 @@
-import { Head } from '@inertiajs/react';
 import type { Project, ProjectCard as ProjectT } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 import SectionHeading from '@/Components/SectionHeading';
 import ProjectCard from '@/Components/ProjectCard';
 import { ButtonLink } from '@/Components/Button';
 
-const FALLBACK = 'https://cdn.greensoft.mn/uploads/site/1698/product/new_eb642aeba0251318c889b0816673e9dc91b811c1.jpg';
+const FALLBACK = '/images/placeholder.svg';
 
 function Fact({ k, v }: { k: string; v: string | null }) {
     if (!v) return null;
@@ -21,7 +21,12 @@ function Fact({ k, v }: { k: string; v: string | null }) {
 export default function Show({ project, related }: { project: Project; related: ProjectT[] }) {
     return (
         <>
-            <Head title={project.title} />
+            <Seo
+                title={project.title}
+                description={project.summary || undefined}
+                image={project.cover}
+                type="article"
+            />
             <PageHero
                 title={project.title}
                 image={project.cover}
@@ -37,7 +42,11 @@ export default function Show({ project, related }: { project: Project; related: 
                 <Container className="py-12">
                     <div className="grid items-start gap-8 lg:grid-cols-2">
                         <figure className="m-0 aspect-square overflow-hidden rounded-card border border-black/10 bg-white">
-                            <img src={project.cover || FALLBACK} alt="" className="h-full w-full object-cover" />
+                            <img
+                                src={project.cover || FALLBACK}
+                                alt={project.cover ? project.title : ''}
+                                className="h-full w-full object-cover"
+                            />
                         </figure>
                         <div className="flex flex-col gap-6">
                             <h2 className="text-[1.5rem] font-bold leading-tight text-ink md:text-[1.7rem]">{project.title}</h2>
@@ -74,8 +83,9 @@ export default function Show({ project, related }: { project: Project; related: 
                         <hr className="my-1 border-black/10" />
                         <div className="grid items-start gap-8 md:grid-cols-2">
                             <img
-                                src={project.detail_image || 'https://cdn.greensoft.mn/uploads/users/45/images/PPPC%20Gov/1.jpg'}
-                                alt=""
+                                src={project.detail_image || FALLBACK}
+                                alt={project.detail_image ? project.title : ''}
+                                loading="lazy"
                                 className="w-full rounded-lg border border-black/10"
                             />
                             <div className="prose-cms">

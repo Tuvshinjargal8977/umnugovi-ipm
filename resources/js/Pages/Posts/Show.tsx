@@ -1,6 +1,7 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import type { Post, PostCard as PostT, PostCategory } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PostSidebar from '@/Components/PostSidebar';
 import { ButtonLink } from '@/Components/Button';
 
@@ -17,7 +18,12 @@ export default function Show({
 
     return (
         <>
-            <Head title={post.title} />
+            <Seo
+                title={post.title}
+                description={post.excerpt || undefined}
+                image={post.cover}
+                type="article"
+            />
 
             <section className="relative isolate overflow-hidden bg-brand-900">
                 {post.cover && <img src={post.cover} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />}

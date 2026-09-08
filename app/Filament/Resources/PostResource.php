@@ -41,7 +41,11 @@ class PostResource extends Resource
             Forms\Components\TextInput::make('author')->label('Нийтэлсэн')->default('Төр, хувийн хэвшлийн түншлэлийн төв'),
             Forms\Components\DateTimePicker::make('published_at')->label('Нийтэлсэн огноо')->seconds(false)->default(now()),
             Forms\Components\FileUpload::make('cover_image')->label('Нүүр зураг')->image()
-                ->disk('public')->directory('posts')->columnSpanFull(),
+                ->disk('public')->directory('posts')->columnSpanFull()
+                ->maxSize(5120)
+                ->imageResizeMode('contain')->imageResizeUpscale(false)
+                ->imageResizeTargetWidth('1600')->imageResizeTargetHeight('1067')
+                ->imageEditor(),
             Forms\Components\Textarea::make('excerpt')->label('Товч')->rows(3)->columnSpanFull(),
             Forms\Components\RichEditor::make('body')->label('Агуулга')->columnSpanFull()
                 ->fileAttachmentsDisk('public')->fileAttachmentsDirectory('posts/body'),

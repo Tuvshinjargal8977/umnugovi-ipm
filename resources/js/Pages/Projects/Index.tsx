@@ -1,6 +1,7 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import type { Paginated, ProjectCard as ProjectT } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 import ProjectCard from '@/Components/ProjectCard';
 import ProjectStages from '@/Components/ProjectStages';
@@ -37,7 +38,10 @@ export default function Index({
 
     return (
         <>
-            <Head title="Төслүүд" />
+            <Seo
+                title="Төслүүд"
+                description="Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүдийн нэгдсэн жагсаалт — явц, урьдчилсан үнэлгээ, санал авах хугацаа."
+            />
             <PageHero
                 eyebrow="Түншлэлийн төслүүд"
                 title="Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүд"

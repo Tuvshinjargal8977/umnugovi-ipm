@@ -5,9 +5,13 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
@@ -18,7 +22,9 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/contact-us', [PageController::class, 'contact'])->name('contact');
-Route::post('/contact-us', [PageController::class, 'submitContact'])->name('contact.submit');
+Route::post('/contact-us', [PageController::class, 'submitContact'])
+    ->middleware('throttle:5,1')
+    ->name('contact.submit');
 
 // Хэл солих
 Route::get('/lang/{locale}', function (string $locale) {

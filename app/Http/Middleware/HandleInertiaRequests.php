@@ -29,7 +29,7 @@ class HandleInertiaRequests extends Middleware
                 'address' => 'Даланзадгад сум, Өмнөговь аймаг, Монгол Улс',
                 'facebook' => null,
                 'mapEmbed' => 'https://maps.google.com/maps?q=43.5708,104.4250&hl=mn&z=13&output=embed',
-                'heroImage' => 'https://cdn.greensoft.mn/uploads/users/45/images/1_26.jpg',
+                'heroImage' => '/images/hero-bg.svg',
             ],
 
             'nav' => [

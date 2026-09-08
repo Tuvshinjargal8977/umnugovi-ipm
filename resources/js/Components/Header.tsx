@@ -121,14 +121,16 @@ export default function Header() {
                                     ) : (
                                         <>
                                             <button
+                                                type="button"
+                                                aria-haspopup="true"
                                                 className={`flex items-center gap-1.5 px-4 py-3.5 text-[0.7rem] font-semibold uppercase tracking-wide transition-colors ${
                                                     active ? 'bg-white/10 text-white' : 'text-white/80 hover:text-white'
                                                 }`}
                                             >
                                                 {item.label}
-                                                <i className="bi bi-chevron-down text-[0.5rem] transition-transform group-hover:rotate-180" />
+                                                <i className="bi bi-chevron-down text-[0.5rem] transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
                                             </button>
-                                            <ul className="invisible absolute left-0 top-full z-20 min-w-60 -translate-y-1 overflow-hidden rounded-xl border-t-2 border-accent bg-white py-2 opacity-0 shadow-2xl transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                                            <ul className="invisible absolute left-0 top-full z-20 min-w-60 -translate-y-1 overflow-hidden rounded-xl border-t-2 border-accent bg-white py-2 opacity-0 shadow-2xl transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                                                 {item.children!.map((c, i) => (
                                                     <li key={i}>
                                                         <NavChildLink href={c.url} label={c.label} />

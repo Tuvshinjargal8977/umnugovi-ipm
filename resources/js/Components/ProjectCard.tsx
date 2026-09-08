@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: { project: T }) {
                 {project.cover ? (
                     <img
                         src={project.cover}
-                        alt=""
+                        alt={project.title}
                         loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />

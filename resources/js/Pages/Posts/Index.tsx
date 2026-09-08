@@ -1,11 +1,12 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import type { Paginated, PostCard as PostT, PostCategory } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 import PostSidebar from '@/Components/PostSidebar';
 import Pagination from '@/Components/Pagination';
 
-const FALLBACK = 'https://cdn.greensoft.mn/uploads/users/45/images/1_26.jpg';
+const FALLBACK = '/images/placeholder.svg';
 
 export default function Index({
     posts,
@@ -21,7 +22,10 @@ export default function Index({
 
     return (
         <>
-            <Head title={title} />
+            <Seo
+                title={title}
+                description={`Өмнөговь аймгийн Төслийн удирдлагын газрын ${title.toLowerCase()} — мэдээ, зарлал, арга хэмжээ, сонгон шалгаруулалт.`}
+            />
             <PageHero
                 title={title}
                 crumbs={[
@@ -49,7 +53,7 @@ export default function Index({
                                                 <Link href={`/posts/${p.slug}`} className="shrink-0">
                                                     <img
                                                         src={p.cover || FALLBACK}
-                                                        alt=""
+                                                        alt={p.cover ? p.title : ''}
                                                         loading="lazy"
                                                         className="aspect-[16/10] w-full rounded-lg object-cover sm:w-56"
                                                     />

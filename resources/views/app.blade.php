@@ -6,22 +6,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php $orgName = 'Өмнөговь аймгийн төслийн удирдлагын газар'; @endphp
 
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/images/emblem.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 
     <title inertia>{{ config('app.name', $orgName) }}</title>
-    <meta name="description" content="{{ $orgName }} — Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүдийн мэдээлэл.">
     <meta name="theme-color" content="#14315a">
-
     <meta property="og:site_name" content="{{ $orgName }}">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ $orgName }}">
-    <meta property="og:description" content="Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүд (IPM).">
-    <meta property="og:image" content="{{ url('/images/emblem.svg') }}">
-    <meta name="twitter:card" content="summary">
+    {{-- Хуудас тус бүрийн description, og:title/description/image, canonical зэргийг
+         resources/js/Components/Seo.tsx (Inertia <Head>) динамикаар удирдана. --}}
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700;800&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @viteReactRefresh

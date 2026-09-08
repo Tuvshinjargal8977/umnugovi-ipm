@@ -1,6 +1,7 @@
-import { Head, useForm, usePage } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import type { SharedProps } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 import SectionHeading from '@/Components/SectionHeading';
 import { Button } from '@/Components/Button';
@@ -16,6 +17,7 @@ export default function Contact() {
         phone: '',
         subject: '',
         body: '',
+        website: '', // honeypot — далд, зөвхөн робот бөглөнө
     });
 
     const submit = (e: React.FormEvent) => {
@@ -31,7 +33,10 @@ export default function Contact() {
 
     return (
         <>
-            <Head title="Холбоо барих" />
+            <Seo
+                title="Холбоо барих"
+                description={`Өмнөговь аймгийн Төслийн удирдлагын газартай холбоо барих — ${site.address}, ${site.phone}, ${site.email}.`}
+            />
             <PageHero title="Холбоо барих" crumbs={[{ label: 'Нүүр', href: '/' }, { label: 'Холбоо барих' }]} />
 
             <section className="bg-white">
@@ -71,6 +76,16 @@ export default function Contact() {
                             )}
 
                             <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+                                <input
+                                    type="text"
+                                    name="website"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                    className="hidden"
+                                    value={data.website}
+                                    onChange={(e) => setData('website', e.target.value)}
+                                />
                                 <div>
                                     <label className={label} htmlFor="c-name">
                                         Нэр <span className="text-red-500">*</span>

@@ -57,9 +57,15 @@ class PageController extends Controller
             'phone' => ['nullable', 'string', 'max:50'],
             'subject' => ['nullable', 'string', 'max:255'],
             'body' => ['required', 'string', 'max:5000'],
+            'website' => ['nullable', 'string', 'max:255'], // honeypot — жинхэнэ хэрэглэгч хоосон орхино
         ]);
 
-        ContactMessage::create($data);
+        // Робот энэ далд талбарыг бөглөсөн бол — амжилттай мэт харуулаад хадгалахгүй.
+        if (! empty($data['website'])) {
+            return back()->with('contact_sent', true);
+        }
+
+        ContactMessage::create(collect($data)->except('website')->all());
 
         return back()->with('contact_sent', true);
     }

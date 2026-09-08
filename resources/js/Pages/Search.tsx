@@ -1,7 +1,8 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import type { PostCard as PostT, ProjectCard as ProjectT } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 import SectionHeading from '@/Components/SectionHeading';
 import ProjectCard from '@/Components/ProjectCard';
@@ -26,7 +27,7 @@ export default function Search({
 
     return (
         <>
-            <Head title={q ? `"${q}" — хайлт` : 'Хайлт'} />
+            <Seo title={q ? `"${q}" — хайлт` : 'Хайлт'} noindex />
             <PageHero title="Хайлт" crumbs={[{ label: 'Нүүр', href: '/' }, { label: 'Хайлт' }]}>
                 <form onSubmit={submit} className="mt-2 flex max-w-xl overflow-hidden rounded-md bg-white">
                     <input

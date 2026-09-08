@@ -1,7 +1,8 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import type { PostCard as PostT, ProjectCard as ProjectT } from '@/types';
 import Container from '@/Components/Container';
+import Seo from '@/Components/Seo';
 import SectionHeading from '@/Components/SectionHeading';
 import ProjectCard from '@/Components/ProjectCard';
 import { ButtonLink } from '@/Components/Button';
@@ -45,7 +46,7 @@ export default function Home({
 
     return (
         <>
-            <Head title="" />
+            <Seo />
 
             {/* HERO */}
             {slides.length > 0 && (
@@ -60,6 +61,7 @@ export default function Home({
                             <img
                                 src={s.bg}
                                 alt=""
+                                loading={i === 0 ? 'eager' : 'lazy'}
                                 className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[8000ms] ease-out ${
                                     i === active ? 'scale-110' : 'scale-100'
                                 }`}
@@ -161,8 +163,9 @@ export default function Home({
                                 >
                                     <div className="aspect-[16/10] overflow-hidden bg-slate-100">
                                         <img
-                                            src={p.cover || 'https://cdn.greensoft.mn/uploads/users/45/images/1_26.jpg'}
-                                            alt=""
+                                            src={p.cover || '/images/placeholder.svg'}
+                                            alt={p.cover ? p.title : ''}
+                                            loading="lazy"
                                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         />
                                     </div>

@@ -60,7 +60,9 @@ class ProjectResource extends Resource
 
                     Forms\Components\DateTimePicker::make('published_at')
                         ->label('Нийтэлсэн огноо')
-                        ->seconds(false),
+                        ->seconds(false)
+                        ->default(now())
+                        ->helperText('Хоосон бол төсөл нийтэд харагдахгүй.'),
                 ])->columns(2),
 
                 Forms\Components\Tabs\Tab::make('Хураангуй')->schema([
@@ -89,10 +91,26 @@ class ProjectResource extends Resource
 
                 Forms\Components\Tabs\Tab::make('Медиа')->schema([
                     Forms\Components\FileUpload::make('cover_image')
-                        ->label('Нүүр зураг')->image()->disk('public')->directory('projects'),
+                        ->label('Нүүр зураг')
+                        ->image()
+                        ->disk('public')->directory('projects')
+                        ->maxSize(5120)
+                        ->imageResizeMode('contain')
+                        ->imageResizeUpscale(false)
+                        ->imageResizeTargetWidth('1600')
+                        ->imageResizeTargetHeight('1067')
+                        ->imageEditor()
+                        ->helperText('Зөвлөмж: 16:10 харьцаа. Хэт том зураг автоматаар багасна (макс 5MB).'),
                     Forms\Components\FileUpload::make('gallery')
-                        ->label('Зургийн цомог')->image()->multiple()->reorderable()
-                        ->disk('public')->directory('projects/gallery'),
+                        ->label('Зургийн цомог')
+                        ->image()->multiple()->reorderable()
+                        ->disk('public')->directory('projects/gallery')
+                        ->maxFiles(12)
+                        ->maxSize(5120)
+                        ->imageResizeMode('contain')
+                        ->imageResizeUpscale(false)
+                        ->imageResizeTargetWidth('1600')
+                        ->imageResizeTargetHeight('1067'),
                 ]),
             ]),
         ]);

@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import Seo from '@/Components/Seo';
 import Container from '@/Components/Container';
 import { ButtonLink } from '@/Components/Button';
 
@@ -14,7 +14,7 @@ export default function Error({ status }: { status: number }) {
     const t = TEXT[status] ?? { title: 'Алдаа гарлаа', body: 'Уучлаарай, ямар нэг зүйл буруу боллоо.' };
     return (
         <>
-            <Head title={t.title} />
+            <Seo title={t.title} noindex />
             <section className="bg-white">
                 <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-4 py-20 text-center">
                     <div className="text-[5rem] font-black leading-none text-brand-100">{status}</div>

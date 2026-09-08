@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\ContactMessage;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Project;
@@ -40,8 +41,10 @@ class AdminSmokeTest extends TestCase
         $this->get('/about-us')->assertOk();
         $this->get('/contact-us')->assertOk();
         $this->post('/contact-us', [
-            'name' => 'Тест', 'email' => 't@example.com', 'body' => 'Сайн байна уу',
+            'name' => '__smoke-test__', 'email' => 'smoke-test@example.com', 'body' => 'Сайн байна уу',
         ])->assertSessionHas('contact_sent');
+        // Жинхэнэ dev DB-д туршилтын мөр үлдээхгүй
+        ContactMessage::where('email', 'smoke-test@example.com')->delete();
 
         // Admin
         $this->actingAs($user);

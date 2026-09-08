@@ -9,8 +9,13 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
 
     return (
         <div className="flex min-h-screen flex-col bg-white">
+            <a href="#main" className="skip-link">
+                Контент руу шилжих
+            </a>
             <Header />
-            <main className="flex-1">{children}</main>
+            <main id="main" className="flex-1">
+                {children}
+            </main>
             <Footer />
 
             <a
