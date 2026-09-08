@@ -56,7 +56,9 @@ export default function Footer() {
                     <div className="rounded-lg bg-white/95 p-3 w-fit">
                         <Brand variant="header" />
                     </div>
-                    <p className="max-w-xl text-[0.75rem] text-white/80">{site.name}</p>
+                    <p className="max-w-xl text-[0.75rem] text-white/80">
+                        Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүдийн нэгдсэн мэдээллийн эх сурвалж.
+                    </p>
                 </div>
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                     <div className="flex flex-col gap-8">
