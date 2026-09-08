@@ -30,8 +30,8 @@ export default function Pagination({ links }: { links: PageLink[] }) {
                         l.active
                             ? 'bg-brand-500 text-white'
                             : l.url
-                              ? 'text-ink-soft hover:bg-brand-50 hover:text-brand-600'
-                              : 'pointer-events-none text-black/25'
+                              ? 'text-ink-soft hover:bg-brand-tint hover:text-link'
+                              : 'pointer-events-none text-ink-faint'
                     }`}
                 >
                     {clean(l.label)}

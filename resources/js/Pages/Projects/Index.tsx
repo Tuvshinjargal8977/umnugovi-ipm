@@ -50,7 +50,7 @@ export default function Index({
 
             <ProjectStages />
 
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-14">
                     {/* status pills */}
                     <div className="mb-4 flex flex-wrap gap-2">
@@ -66,7 +66,7 @@ export default function Index({
 
                     {/* category filter */}
                     {categories.length > 0 && (
-                        <div className="mb-8 flex flex-wrap gap-2 border-t border-black/5 pt-4">
+                        <div className="mb-8 flex flex-wrap gap-2 border-t border-line pt-4">
                             <Pill onClick={() => go({ category: null })} on={!active}>
                                 Бүх салбар
                             </Pill>
@@ -101,7 +101,7 @@ function Pill({ children, on, onClick }: { children: React.ReactNode; on: boolea
         <button
             onClick={onClick}
             className={`rounded-full px-3.5 py-1.5 text-[0.72rem] font-semibold transition-colors ${
-                on ? 'bg-brand-600 text-white' : 'bg-slate-100 text-ink-soft hover:bg-brand-50 hover:text-brand-700'
+                on ? 'bg-brand-600 text-white' : 'bg-surface-sunken text-ink-soft hover:bg-brand-tint hover:text-link'
             }`}
         >
             {children}

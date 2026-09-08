@@ -53,8 +53,8 @@ export default function Footer() {
         <footer className="bg-gradient-to-br from-brand-900 to-brand-500 text-white">
             <Container className="py-12">
                 <div className="mb-10 flex flex-col gap-3 border-b border-white/15 pb-8">
-                    <div className="rounded-lg bg-white/95 p-3 w-fit">
-                        <Brand variant="header" />
+                    <div className="w-fit rounded-lg bg-white/10 p-3 ring-1 ring-white/15">
+                        <Brand variant="footer" />
                     </div>
                     <p className="max-w-xl text-[0.75rem] text-white/80">
                         Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүдийн нэгдсэн мэдээллийн эх сурвалж.

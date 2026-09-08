@@ -34,7 +34,7 @@ export default function Brand({ variant = 'header' }: { variant?: 'header' | 'fo
             <span className="flex flex-col justify-center">
                 <span
                     className={`text-[1.65rem] font-extrabold leading-none tracking-[-0.03em] ${
-                        dark ? 'text-white' : 'text-brand-700'
+                        dark ? 'text-white' : 'text-brand-700 dark:text-brand-300'
                     }`}
                 >
                     {site.nameShort}

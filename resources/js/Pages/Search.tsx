@@ -34,7 +34,7 @@ export default function Search({
                         value={term}
                         onChange={(e) => setTerm(e.target.value)}
                         placeholder="Хайх үгээ бичнэ үү"
-                        className="w-full px-4 py-3 text-[0.85rem] outline-none"
+                        className="w-full bg-white px-4 py-3 text-[0.85rem] text-slate-800 outline-none placeholder:text-slate-400"
                         autoFocus
                     />
                     <button className="bg-white px-4 text-brand-600">
@@ -43,7 +43,7 @@ export default function Search({
                 </form>
             </PageHero>
 
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-12">
                     {q.length < 2 ? (
                         <p className="text-ink-soft">Хайх үгээ дор хаяж 2 тэмдэгт оруулна уу.</p>
@@ -69,10 +69,10 @@ export default function Search({
                             {posts.length > 0 && (
                                 <div>
                                     <SectionHeading size="sm">Мэдээ мэдээлэл ({posts.length})</SectionHeading>
-                                    <ul className="flex flex-col divide-y divide-black/10">
+                                    <ul className="flex flex-col divide-y divide-line">
                                         {posts.map((p) => (
                                             <li key={p.slug} className="py-3">
-                                                <div className="flex flex-wrap gap-3 text-[0.7rem] text-slate-400">
+                                                <div className="flex flex-wrap gap-3 text-[0.7rem] text-ink-faint">
                                                     <span>
                                                         <i className="bi bi-calendar3 mr-1" />
                                                         {p.published_at}
@@ -84,7 +84,7 @@ export default function Search({
                                                         </span>
                                                     )}
                                                 </div>
-                                                <Link href={`/posts/${p.slug}`} className="block font-bold text-ink hover:text-brand-600">
+                                                <Link href={`/posts/${p.slug}`} className="block font-bold text-ink hover:text-link">
                                                     {p.title}
                                                 </Link>
                                                 {p.excerpt && (

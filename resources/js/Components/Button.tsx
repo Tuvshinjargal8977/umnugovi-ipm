@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from 'react';
 const styles = {
     primary: 'bg-brand-600 text-white border border-brand-600 hover:bg-brand-700 hover:border-brand-700',
     accent: 'bg-accent text-white border border-accent hover:brightness-95',
-    ghost: 'bg-transparent text-ink border border-black/15 hover:border-brand-600 hover:text-brand-700',
+    ghost: 'bg-transparent text-ink border border-line hover:border-brand-600 hover:text-link',
     white: 'bg-white text-brand-700 border border-white hover:bg-brand-50',
 };
 

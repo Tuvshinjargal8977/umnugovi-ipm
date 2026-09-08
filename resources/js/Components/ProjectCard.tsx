@@ -8,7 +8,7 @@ export default function ProjectCard({ project }: { project: T }) {
     return (
         <Link
             href={`/projects/${project.slug}`}
-            className="group relative flex h-full flex-col overflow-hidden rounded-card bg-white ring-1 ring-black/[0.06] transition-all duration-200 hover:-translate-y-1 hover:ring-brand-500/40 hover:shadow-[0_1rem_2.5rem_-0.5rem_rgba(20,49,90,0.18)]"
+            className="group relative flex h-full flex-col overflow-hidden rounded-card bg-surface ring-1 ring-line-soft transition-all duration-200 hover:-translate-y-1 hover:ring-brand-500/40 hover:shadow-[0_1rem_2.5rem_-0.5rem_rgba(20,49,90,0.18)]"
         >
             <div className="relative aspect-[16/10] overflow-hidden">
                 {project.cover ? (
@@ -34,7 +34,7 @@ export default function ProjectCard({ project }: { project: T }) {
                 {project.category && (
                     <span className="text-[0.62rem] font-bold uppercase tracking-wide text-accent">{project.category.name}</span>
                 )}
-                <span className="font-bold leading-snug text-ink line-clamp-3 transition-colors group-hover:text-brand-700">
+                <span className="font-bold leading-snug text-ink line-clamp-3 transition-colors group-hover:text-link">
                     {project.title}
                 </span>
                 {project.proposal_deadline && (

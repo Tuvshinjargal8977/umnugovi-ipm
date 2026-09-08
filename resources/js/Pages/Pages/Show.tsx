@@ -25,7 +25,7 @@ export default function Show({
                 image={page.cover}
                 crumbs={[{ label: 'Нүүр', href: '/' }, { label: page.title }]}
             />
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-14">
                     <div className={siblings.length > 0 ? 'grid gap-10 lg:grid-cols-[16rem_1fr]' : ''}>
                         {siblings.length > 0 && (
@@ -33,7 +33,7 @@ export default function Show({
                                 <div className="lg:sticky lg:top-28">
                                     <div className="mb-3 flex items-center gap-3">
                                         <h2 className="m-0 text-base font-bold text-ink">Холбоотой хуудас</h2>
-                                        <span className="h-px flex-1 bg-black/10" />
+                                        <span className="h-px flex-1 bg-line" />
                                     </div>
                                     <ul className="flex flex-col gap-1">
                                         {siblings.map((s) => (
@@ -43,7 +43,7 @@ export default function Show({
                                                     className={`block rounded-lg px-3 py-2 text-[0.8rem] transition-colors ${
                                                         s.active
                                                             ? 'bg-brand-600 font-semibold text-white'
-                                                            : 'text-slate-600 hover:bg-brand-50 hover:text-brand-700'
+                                                            : 'text-ink-soft hover:bg-brand-tint hover:text-link'
                                                     }`}
                                                 >
                                                     {s.title}

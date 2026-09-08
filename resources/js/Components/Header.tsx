@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import type { SharedProps } from '@/types';
 import Container from './Container';
 import Brand from './Brand';
+import ThemeToggle from './ThemeToggle';
 
 function tel(v: string) {
     return 'tel:' + v.replace(/[^0-9+]/g, '');
@@ -37,7 +38,7 @@ export default function Header() {
         <header className="sticky top-0 z-40">
             {/* identity bar */}
             <div
-                className={`border-b border-black/5 bg-white transition-all duration-200 ${
+                className={`border-b border-line-soft bg-surface transition-all duration-200 ${
                     stuck ? 'py-1.5 shadow-md' : 'py-3'
                 }`}
             >
@@ -56,11 +57,12 @@ export default function Header() {
                                 key={c.icon}
                                 href={c.href}
                                 title={c.title}
-                                className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-200 text-[0.75rem] text-brand-600 transition-colors hover:border-brand-500 hover:bg-brand-500 hover:text-white"
+                                className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-200 text-[0.75rem] text-brand-600 transition-colors hover:border-brand-500 hover:bg-brand-500 hover:text-white dark:border-white/20 dark:text-white/85"
                             >
                                 <i className={`bi bi-${c.icon}`} />
                             </a>
                         ))}
+                        <ThemeToggle />
                     </div>
 
                     <form onSubmit={submitSearch} className="hidden xl:block">
@@ -71,19 +73,19 @@ export default function Header() {
                                 onChange={(e) => setQ(e.target.value)}
                                 type="search"
                                 placeholder="Хайх"
-                                className="w-52 rounded-full border border-black/15 bg-slate-50 py-1.5 pl-8 pr-3 text-[0.72rem] outline-none transition-colors focus:border-brand-400 focus:bg-white"
+                                className="w-52 rounded-full border border-line bg-surface-sunken py-1.5 pl-8 pr-3 text-[0.72rem] text-ink outline-none transition-colors focus:border-brand-400 focus:bg-surface"
                             />
                         </div>
                     </form>
 
-                    <div className="hidden items-center gap-0.5 rounded-full bg-slate-100 p-0.5 lg:flex">
+                    <div className="hidden items-center gap-0.5 rounded-full bg-surface-sunken p-0.5 lg:flex">
                         {['mn', 'en'].map((l) => (
                             <Link
                                 key={l}
                                 href={`/lang/${l}`}
                                 preserveScroll
                                 className={`rounded-full px-2 py-0.5 text-[0.7rem] font-bold uppercase transition-colors ${
-                                    locale === l ? 'bg-brand-600 text-white' : 'text-ink-soft hover:text-brand-600'
+                                    locale === l ? 'bg-brand-600 text-white' : 'text-ink-soft hover:text-link'
                                 }`}
                             >
                                 {l}
@@ -91,13 +93,16 @@ export default function Header() {
                         ))}
                     </div>
 
-                    <button
-                        onClick={() => setOpen((v) => !v)}
-                        className="ml-auto flex h-9 w-9 items-center justify-center rounded-lg border border-brand-500 text-brand-500 xl:hidden"
-                        aria-label="Цэс"
-                    >
-                        <i className={`bi ${open ? 'bi-x-lg' : 'bi-list'} text-lg`} />
-                    </button>
+                    <div className="ml-auto flex items-center gap-2 xl:hidden">
+                        <ThemeToggle className="lg:hidden" />
+                        <button
+                            onClick={() => setOpen((v) => !v)}
+                            className="flex h-9 w-9 items-center justify-center rounded-lg border border-brand-500 text-brand-500 dark:border-accent dark:text-accent"
+                            aria-label="Цэс"
+                        >
+                            <i className={`bi ${open ? 'bi-x-lg' : 'bi-list'} text-lg`} />
+                        </button>
+                    </div>
                 </Container>
             </div>
 
@@ -130,7 +135,7 @@ export default function Header() {
                                                 {item.label}
                                                 <i className="bi bi-chevron-down text-[0.5rem] transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
                                             </button>
-                                            <ul className="invisible absolute left-0 top-full z-20 min-w-60 -translate-y-1 overflow-hidden rounded-xl border-t-2 border-accent bg-white py-2 opacity-0 shadow-2xl transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                                            <ul className="invisible absolute left-0 top-full z-20 min-w-60 -translate-y-1 overflow-hidden rounded-xl border-t-2 border-accent bg-surface py-2 opacity-0 shadow-2xl transition-all duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                                                 {item.children!.map((c, i) => (
                                                     <li key={i}>
                                                         <NavChildLink href={c.url} label={c.label} />
@@ -198,7 +203,7 @@ export default function Header() {
 function NavChildLink({ href, label }: { href: string; label: string }) {
     const external = /^https?:\/\//.test(href);
     const cls =
-        'block px-5 py-2 text-[0.72rem] text-slate-600 transition-colors hover:bg-brand-50 hover:text-brand-700';
+        'block px-5 py-2 text-[0.72rem] text-ink-soft transition-colors hover:bg-brand-tint hover:text-link';
     return external ? (
         <a href={href} target="_blank" rel="noopener" className={cls}>
             {label}

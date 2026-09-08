@@ -15,9 +15,9 @@ export default function Error({ status }: { status: number }) {
     return (
         <>
             <Seo title={t.title} noindex />
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-4 py-20 text-center">
-                    <div className="text-[5rem] font-black leading-none text-brand-100">{status}</div>
+                    <div className="text-[5rem] font-black leading-none text-brand-100 dark:text-brand-900">{status}</div>
                     <h1 className="text-2xl font-bold text-ink">{t.title}</h1>
                     <p className="max-w-md text-ink-soft">{t.body}</p>
                     <div className="mt-2 flex flex-wrap justify-center gap-3">

@@ -6,6 +6,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php $orgName = 'Өмнөговь аймгийн төслийн удирдлагын газар'; @endphp
 
+    {{-- Dark горимыг зураг зурахаас өмнө тохируулж, "гялбаа"-аас сэргийлнэ --}}
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/images/emblem.svg" type="image/svg+xml">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">

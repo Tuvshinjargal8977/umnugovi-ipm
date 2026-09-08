@@ -115,7 +115,7 @@ export default function Home({
             )}
 
             {/* TAGLINE STRIP */}
-            <section className="border-b border-black/5 bg-brand-950 text-white">
+            <section className="border-b border-line bg-brand-950 text-white">
                 <Container className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-3.5 text-center text-[0.66rem] font-bold uppercase tracking-wider sm:text-[0.74rem]">
                     {['Нэг байршил', 'Нэгдсэн төлөвлөлт', 'Дэд бүтэц', 'Аюулгүй орчин', 'Олон төрлийн худалдаа, үйлчилгээ'].map(
                         (t, i) => (
@@ -129,15 +129,15 @@ export default function Home({
             </section>
 
             {/* STATS */}
-            <section className="bg-white">
-                <Container className="grid grid-cols-3 divide-x divide-black/5 py-10 text-center">
+            <section className="bg-surface">
+                <Container className="grid grid-cols-3 divide-x divide-line-soft py-10 text-center">
                     {[
                         { n: stats.projects, l: 'Батлагдсан төсөл' },
                         { n: stats.preAssessed, l: 'Урьдчилсан үнэлгээтэй' },
                         { n: stats.categories, l: 'Салбар чиглэл' },
                     ].map((s) => (
                         <div key={s.l} className="px-2">
-                            <div className="text-3xl font-black text-brand-700 md:text-4xl">{s.n}</div>
+                            <div className="text-3xl font-black text-brand-700 dark:text-brand-300 md:text-4xl">{s.n}</div>
                             <div className="mt-1 text-[0.7rem] font-semibold uppercase tracking-wide text-ink-soft">{s.l}</div>
                         </div>
                     ))}
@@ -149,7 +149,7 @@ export default function Home({
 
             {/* NEWS */}
             {news.length > 0 && (
-                <section className="bg-slate-50">
+                <section className="bg-surface-sunken">
                     <Container className="py-14">
                         <SectionHeading eyebrow="Мэдээ" action={{ label: 'Бүгд', href: '/posts' }}>
                             Мэдээ мэдээлэл
@@ -159,9 +159,9 @@ export default function Home({
                                 <Link
                                     key={p.slug}
                                     href={`/posts/${p.slug}`}
-                                    className="group flex h-full flex-col overflow-hidden rounded-card bg-white ring-1 ring-black/[0.06] transition-all duration-200 hover:-translate-y-1 hover:ring-brand-500/40 hover:shadow-[0_1rem_2.5rem_-0.5rem_rgba(20,49,90,0.18)]"
+                                    className="group flex h-full flex-col overflow-hidden rounded-card bg-surface ring-1 ring-line-soft transition-all duration-200 hover:-translate-y-1 hover:ring-brand-500/40 hover:shadow-[0_1rem_2.5rem_-0.5rem_rgba(20,49,90,0.18)]"
                                 >
-                                    <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+                                    <div className="aspect-[16/10] overflow-hidden bg-surface-sunken">
                                         <img
                                             src={p.cover || '/images/placeholder.svg'}
                                             alt={p.cover ? p.title : ''}
@@ -173,7 +173,7 @@ export default function Home({
                                         <span className="text-[0.66rem] font-medium uppercase tracking-wide text-accent">
                                             {p.published_at}
                                         </span>
-                                        <span className="font-bold leading-snug text-ink line-clamp-3 transition-colors group-hover:text-brand-700">
+                                        <span className="font-bold leading-snug text-ink line-clamp-3 transition-colors group-hover:text-link">
                                             {p.title}
                                         </span>
                                     </div>
@@ -187,7 +187,7 @@ export default function Home({
             {/* PROJECT SECTIONS */}
             {Object.entries(sections).map(([key, items], idx) =>
                 items.length === 0 ? null : (
-                    <section key={key} className={idx % 2 === 1 ? 'bg-slate-50' : 'bg-white'}>
+                    <section key={key} className={idx % 2 === 1 ? 'bg-surface-sunken' : 'bg-surface'}>
                         <Container className="py-14">
                             <SectionHeading
                                 eyebrow={idx === 0 ? 'Төслүүд' : undefined}
@@ -206,7 +206,7 @@ export default function Home({
             )}
 
             {/* PARTNERS */}
-            <section className="border-t border-black/5 bg-white">
+            <section className="border-t border-line bg-surface">
                 <Container className="py-14">
                     <SectionHeading eyebrow="Хамтын ажиллагаа" size="sm">
                         Хамтрагч байгууллагууд
@@ -215,7 +215,7 @@ export default function Home({
                         {['Азийн хөгжлийн банк', 'Дэлхийн банк', 'НҮБ-ын хөгжлийн хөтөлбөр', 'Эдийн засаг, хөгжлийн яам'].map((p) => (
                             <div
                                 key={p}
-                                className="flex h-20 items-center justify-center rounded-card bg-slate-50 p-3 text-center text-[0.78rem] font-bold text-slate-400 ring-1 ring-black/[0.04]"
+                                className="flex h-20 items-center justify-center rounded-card bg-surface-sunken p-3 text-center text-[0.78rem] font-bold text-ink-faint ring-1 ring-line-soft"
                             >
                                 {p}
                             </div>
@@ -230,14 +230,14 @@ export default function Home({
 function FeaturedProject({ p }: { p: Featured }) {
     const v = catVisual(p.category?.slug);
     return (
-        <section className="bg-slate-50">
+        <section className="bg-surface-sunken">
             <Container className="py-14">
                 <SectionHeading eyebrow="Онцлох" size="sm">
                     Санал авч буй төсөл
                 </SectionHeading>
                 <Link
                     href={`/projects/${p.slug}`}
-                    className="group grid overflow-hidden rounded-card bg-white ring-1 ring-black/[0.06] transition-all hover:ring-brand-500/40 hover:shadow-[0_1.5rem_3rem_-0.75rem_rgba(20,49,90,0.2)] md:grid-cols-2"
+                    className="group grid overflow-hidden rounded-card bg-surface ring-1 ring-line-soft transition-all hover:ring-brand-500/40 hover:shadow-[0_1.5rem_3rem_-0.75rem_rgba(20,49,90,0.2)] md:grid-cols-2"
                 >
                     <div
                         className="relative flex min-h-[14rem] items-center justify-center overflow-hidden"
@@ -260,7 +260,7 @@ function FeaturedProject({ p }: { p: Featured }) {
                         {p.category && (
                             <span className="text-[0.66rem] font-bold uppercase tracking-wide text-accent">{p.category.name}</span>
                         )}
-                        <h3 className="text-lg font-bold leading-snug text-ink transition-colors group-hover:text-brand-700 md:text-xl">
+                        <h3 className="text-lg font-bold leading-snug text-ink transition-colors group-hover:text-link md:text-xl">
                             {p.title}
                         </h3>
                         {p.summary && <p className="text-[0.82rem] leading-relaxed text-ink-soft line-clamp-4">{p.summary}</p>}
@@ -276,7 +276,7 @@ function FeaturedProject({ p }: { p: Featured }) {
                                 </span>
                             )}
                         </div>
-                        <span className="mt-3 inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-wide text-brand-600">
+                        <span className="mt-3 inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-wide text-brand-600 dark:text-brand-300">
                             Дэлгэрэнгүй <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
                         </span>
                     </div>

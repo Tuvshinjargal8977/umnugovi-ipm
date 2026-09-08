@@ -12,7 +12,7 @@ const STAGES = [
 
 export default function ProjectStages() {
     return (
-        <section className="bg-slate-50">
+        <section className="bg-surface-sunken">
             <Container className="py-12">
                 <SectionHeading size="sm">Түншлэлийн төслийн үе шат</SectionHeading>
                 <p className="mb-6 text-[0.8rem] text-ink-soft">Төр, хувийн хэвшлийн түншлэлийн тухай хуулийн 17 дугаар зүйлийн дагуу</p>
@@ -21,7 +21,7 @@ export default function ProjectStages() {
                     {STAGES.map((s, i) => (
                         <li
                             key={i}
-                            className="relative flex flex-col gap-2 rounded-card border border-black/10 bg-white p-4"
+                            className="relative flex flex-col gap-2 rounded-card border border-line bg-surface p-4"
                         >
                             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-500 text-[0.8rem] font-bold text-white">
                                 {i + 1}
@@ -31,7 +31,7 @@ export default function ProjectStages() {
                                 {Array.from({ length: 6 }).map((_, k) => (
                                     <span
                                         key={k}
-                                        className={`h-1 flex-1 rounded-full ${k <= i ? 'bg-accent' : 'bg-black/10'}`}
+                                        className={`h-1 flex-1 rounded-full ${k <= i ? 'bg-accent' : 'bg-line'}`}
                                     />
                                 ))}
                             </span>

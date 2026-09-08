@@ -11,7 +11,7 @@ const FALLBACK = '/images/placeholder.svg';
 function Fact({ k, v }: { k: string; v: string | null }) {
     if (!v) return null;
     return (
-        <li className="flex gap-3 border-b border-dashed border-black/15 py-2.5 text-[0.78rem] last:border-0">
+        <li className="flex gap-3 border-b border-dashed border-line py-2.5 text-[0.78rem] last:border-0">
             <span className="min-w-40 font-bold text-ink">{k}</span>
             <span className="text-ink-soft">{v}</span>
         </li>
@@ -38,10 +38,10 @@ export default function Show({ project, related }: { project: Project; related: 
             />
 
             {/* summary */}
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-12">
                     <div className="grid items-start gap-8 lg:grid-cols-2">
-                        <figure className="m-0 aspect-square overflow-hidden rounded-card border border-black/10 bg-white">
+                        <figure className="m-0 aspect-square overflow-hidden rounded-card border border-line bg-surface">
                             <img
                                 src={project.cover || FALLBACK}
                                 alt={project.cover ? project.title : ''}
@@ -76,17 +76,17 @@ export default function Show({ project, related }: { project: Project; related: 
 
             {/* detail */}
             {(project.body || project.policy_reference || project.financing) && (
-                <section id="detail" className="border-t border-black/5 bg-white">
+                <section id="detail" className="border-t border-line bg-surface">
                     <Container className="flex flex-col gap-4 py-12">
                         <SectionHeading>Төслийн дэлгэрэнгүй мэдээлэл</SectionHeading>
                         {project.summary && <p className="text-[0.9rem] leading-relaxed text-ink">{project.summary}</p>}
-                        <hr className="my-1 border-black/10" />
+                        <hr className="my-1 border-line" />
                         <div className="grid items-start gap-8 md:grid-cols-2">
                             <img
                                 src={project.detail_image || FALLBACK}
                                 alt={project.detail_image ? project.title : ''}
                                 loading="lazy"
-                                className="w-full rounded-lg border border-black/10"
+                                className="w-full rounded-lg border border-line"
                             />
                             <div className="prose-cms">
                                 {project.body && <div dangerouslySetInnerHTML={{ __html: project.body }} />}
@@ -119,7 +119,7 @@ export default function Show({ project, related }: { project: Project; related: 
 
             {/* related */}
             {related.length > 0 && (
-                <section className="border-t border-black/5 bg-slate-50">
+                <section className="border-t border-line bg-surface-sunken">
                     <Container className="py-12">
                         <SectionHeading size="sm">Холбоотой төслүүд</SectionHeading>
                         <div className="grid gap-5 md:grid-cols-3">

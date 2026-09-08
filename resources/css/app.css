@@ -3,6 +3,9 @@
 @source '../js/**/*.{ts,tsx}';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
+/* Гар аргаар сэлгэдэг dark горим: <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-sans: 'Roboto Condensed', ui-sans-serif, system-ui, sans-serif;
 
@@ -19,14 +22,39 @@
     --color-brand-900: #14315a;
     --color-brand-950: #0d2140;
 
-    --color-ink: #1a1f27;
-    --color-ink-soft: #5a6474;
-
     /* IPM / сүлдний алтан аялгуу */
     --color-accent: #b98f3f;
     --color-accent-soft: #d9b978;
 
     --radius-card: 0.875rem;
+
+    /* Семантик өнгө — light утгууд. Dark утгыг доор .dark блокт дарж бичнэ. */
+    --color-ink: #1a1f27;          /* үндсэн текст */
+    --color-ink-soft: #5a6474;     /* хоёрдогч текст */
+    --color-ink-faint: #8b94a3;    /* бүдэг текст (огноо, тэмдэглэгээ) */
+    --color-surface: #ffffff;      /* хуудас ба карт */
+    --color-surface-raised: #ffffff; /* өнгөт хэсэг дээрх карт */
+    --color-surface-sunken: #f5f7fb; /* saaral хэсгүүд (slate-50) */
+    --color-line: rgba(15, 23, 42, 0.1);   /* хүрээ */
+    --color-line-soft: rgba(15, 23, 42, 0.06);
+    --color-brand-tint: #eef3fb;    /* hover дэвсгэр (brand-50) */
+    --color-link: #1f4e93;          /* холбоос/онцлох текст surface дээр */
+}
+
+/* Dark горимын өнгө — .dark нь <html> дээр. Давхаргагүй тул :root-г дарна. */
+.dark {
+    color-scheme: dark;
+
+    --color-ink: #e8ecf3;
+    --color-ink-soft: #a2afc1;
+    --color-ink-faint: #7a8697;
+    --color-surface: #0e1a2e;
+    --color-surface-raised: #16243c;
+    --color-surface-sunken: #0a1322;
+    --color-line: rgba(255, 255, 255, 0.12);
+    --color-line-soft: rgba(255, 255, 255, 0.07);
+    --color-brand-tint: #1b2f4d;
+    --color-link: #8fb6e6;
 }
 
 @layer base {
@@ -36,7 +64,7 @@
     }
 
     body {
-        @apply bg-white text-ink-soft antialiased;
+        @apply bg-surface text-ink-soft antialiased;
         font-family: var(--font-sans);
         letter-spacing: 0.01em;
     }
@@ -93,9 +121,9 @@
 .prose-cms h3 { @apply text-lg mt-2; }
 .prose-cms h4 { @apply text-base mt-2; }
 .prose-cms strong { @apply font-bold text-ink; }
-.prose-cms a { @apply text-brand-600 underline underline-offset-2; }
+.prose-cms a { @apply text-link underline underline-offset-2; }
 .prose-cms ul { @apply list-disc pl-5 flex flex-col gap-1; }
 .prose-cms ol { @apply list-decimal pl-5 flex flex-col gap-1; }
-.prose-cms hr { @apply my-5 border-black/10; }
+.prose-cms hr { @apply my-5 border-line; }
 .prose-cms img { @apply rounded-lg max-w-full; }
 .prose-cms blockquote { @apply border-l-4 border-brand-200 pl-4 italic text-ink-soft; }

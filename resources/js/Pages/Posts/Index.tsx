@@ -35,7 +35,7 @@ export default function Index({
                 ]}
             />
 
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-12">
                     <div className="grid gap-8 lg:grid-cols-[16rem_1fr]">
                         <aside className="order-2 lg:order-1">
@@ -47,7 +47,7 @@ export default function Index({
                                 <p className="text-ink-soft">Энэ ангилалд нийтэлсэн мэдээ алга.</p>
                             ) : (
                                 <>
-                                    <div className="flex flex-col divide-y divide-black/10">
+                                    <div className="flex flex-col divide-y divide-line">
                                         {posts.data.map((p) => (
                                             <article key={p.slug} className="flex flex-col gap-4 py-6 first:pt-0 sm:flex-row">
                                                 <Link href={`/posts/${p.slug}`} className="shrink-0">
@@ -59,7 +59,7 @@ export default function Index({
                                                     />
                                                 </Link>
                                                 <div>
-                                                    <div className="flex flex-wrap gap-3 text-[0.7rem] text-slate-400">
+                                                    <div className="flex flex-wrap gap-3 text-[0.7rem] text-ink-faint">
                                                         <span>
                                                             <i className="bi bi-calendar3 mr-1" />
                                                             {p.published_at}
@@ -73,14 +73,14 @@ export default function Index({
                                                         {p.category && (
                                                             <Link
                                                                 href={`/posts?category=${p.category.slug}`}
-                                                                className="rounded bg-slate-100 px-1.5 text-slate-600"
+                                                                className="rounded bg-surface-sunken px-1.5 text-ink-soft"
                                                             >
                                                                 {p.category.name}
                                                             </Link>
                                                         )}
                                                     </div>
                                                     <h3 className="my-1.5 text-base font-bold leading-snug">
-                                                        <Link href={`/posts/${p.slug}`} className="text-ink hover:text-brand-600">
+                                                        <Link href={`/posts/${p.slug}`} className="text-ink hover:text-link">
                                                             {p.title}
                                                         </Link>
                                                     </h3>

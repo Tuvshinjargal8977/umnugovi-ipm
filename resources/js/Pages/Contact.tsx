@@ -6,7 +6,7 @@ import PageHero from '@/Components/PageHero';
 import SectionHeading from '@/Components/SectionHeading';
 import { Button } from '@/Components/Button';
 
-const field = 'w-full rounded-md border border-black/25 px-3 py-2 text-[0.8rem] outline-none focus:border-brand-400';
+const field = 'w-full rounded-md border border-line px-3 py-2 text-[0.8rem] outline-none focus:border-brand-400';
 const label = 'mb-1 block text-[0.72rem] font-semibold text-ink';
 
 export default function Contact() {
@@ -39,13 +39,13 @@ export default function Contact() {
             />
             <PageHero title="Холбоо барих" crumbs={[{ label: 'Нүүр', href: '/' }, { label: 'Холбоо барих' }]} />
 
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-12">
                     <div className="grid gap-8 lg:grid-cols-[22rem_1fr]">
                         <div className="flex flex-col gap-3">
                             {cards.map((c) => (
-                                <div key={c.icon} className="flex items-start gap-3 rounded-card border border-black/10 p-6">
-                                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-500/10 text-brand-600">
+                                <div key={c.icon} className="flex items-start gap-3 rounded-card border border-line p-6">
+                                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 dark:bg-brand-400/15 dark:text-brand-300">
                                         <i className={`bi bi-${c.icon}`} />
                                     </span>
                                     <div>

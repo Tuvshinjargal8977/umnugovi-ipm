@@ -8,7 +8,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
     const { site } = usePage<SharedProps>().props;
 
     return (
-        <div className="flex min-h-screen flex-col bg-white">
+        <div className="flex min-h-screen flex-col bg-surface">
             <a href="#main" className="skip-link">
                 Контент руу шилжих
             </a>

@@ -56,7 +56,7 @@ export default function Show({
                 </Container>
             </section>
 
-            <section className="bg-white">
+            <section className="bg-surface">
                 <Container className="py-12">
                     <div className="grid gap-10 lg:grid-cols-[1fr_18rem]">
                         <div>
@@ -65,7 +65,7 @@ export default function Show({
                                 {post.body && <div dangerouslySetInnerHTML={{ __html: post.body }} />}
                             </div>
 
-                            <hr className="my-6 border-black/10" />
+                            <hr className="my-6 border-line" />
                             <div className="flex flex-wrap items-center gap-3">
                                 <ButtonLink href="/posts" variant="ghost">
                                     <i className="bi bi-arrow-left" /> Жагсаалт руу
@@ -81,7 +81,7 @@ export default function Show({
                                             href={s.u}
                                             target="_blank"
                                             rel="noopener"
-                                            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/15 text-slate-600 hover:border-brand-500 hover:bg-brand-500 hover:text-white"
+                                            className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:border-brand-500 hover:bg-brand-500 hover:text-white"
                                         >
                                             <i className={`bi bi-${s.i}`} />
                                         </a>
@@ -95,14 +95,14 @@ export default function Show({
                             <div>
                                 <div className="mb-3 flex items-center gap-3">
                                     <h2 className="m-0 text-base font-bold uppercase text-ink">Сүүлийн мэдээ</h2>
-                                    <span className="h-px flex-1 bg-black/15" />
+                                    <span className="h-px flex-1 bg-line" />
                                 </div>
                                 <ul className="flex flex-col gap-3">
                                     {recent.map((r) => (
                                         <li key={r.slug}>
                                             <Link href={`/posts/${r.slug}`} className="flex flex-col">
-                                                <span className="text-[0.7rem] text-slate-400">{r.published_at}</span>
-                                                <span className="font-semibold leading-snug text-ink hover:text-brand-600">
+                                                <span className="text-[0.7rem] text-ink-faint">{r.published_at}</span>
+                                                <span className="font-semibold leading-snug text-ink hover:text-link">
                                                     {r.title}
                                                 </span>
                                             </Link>
