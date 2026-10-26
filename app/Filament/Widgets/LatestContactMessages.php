@@ -33,6 +33,8 @@ class LatestContactMessages extends BaseWidget
                 Tables\Columns\TextColumn::make('subject')->label('Гарчиг')->limit(45)->placeholder('—'),
                 Tables\Columns\TextColumn::make('created_at')->label('Огноо')->since()->sortable(),
             ])
-            ->recordUrl(fn (ContactMessage $record): string => ContactMessageResource::getUrl('edit', ['record' => $record]));
+            ->recordUrl(fn (ContactMessage $record): string => ContactMessageResource::getUrl('edit', ['record' => $record]))
+            ->emptyStateHeading('Санал хүсэлт алга байна')
+            ->emptyStateIcon('heroicon-o-inbox');
     }
 }

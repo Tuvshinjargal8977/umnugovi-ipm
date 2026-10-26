@@ -18,7 +18,7 @@ class SearchController extends Controller
         if (mb_strlen($q) >= 2) {
             $like = '%' . $q . '%';
 
-            $projects = Project::query()->published()
+            $projects = Project::query()->published()->with('category')
                 ->where(fn ($w) => $w->where('title', 'like', $like)
                     ->orWhere('summary', 'like', $like)->orWhere('body', 'like', $like))
                 ->latest('published_at')->limit(30)->get()

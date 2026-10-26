@@ -1,5 +1,5 @@
-import { Link, router } from '@inertiajs/react';
-import type { Paginated, ProjectCard as ProjectT } from '@/types';
+import { Link, router, usePage } from '@inertiajs/react';
+import type { Paginated, ProjectCard as ProjectT, SharedProps } from '@/types';
 import Container from '@/Components/Container';
 import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
@@ -26,6 +26,9 @@ export default function Index({
     activeStatus: string | null;
     statusOptions: Record<string, string>;
 }) {
+    const { locale } = usePage<SharedProps>().props;
+    const en = locale === 'en';
+
     const go = (params: Record<string, string | null>) => {
         const q: Record<string, string> = {};
         if (active && !('category' in params)) q.category = active;
@@ -39,13 +42,21 @@ export default function Index({
     return (
         <>
             <Seo
-                title="Төслүүд"
-                description="Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүдийн нэгдсэн жагсаалт — явц, урьдчилсан үнэлгээ, санал авах хугацаа."
+                title={en ? 'Projects' : 'Төслүүд'}
+                description={
+                    en
+                        ? 'Unified list of public–private partnership projects in Umnugovi Province — status, pre-assessment, proposal deadlines.'
+                        : 'Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүдийн нэгдсэн жагсаалт — явц, урьдчилсан үнэлгээ, санал авах хугацаа.'
+                }
             />
             <PageHero
-                eyebrow="Түншлэлийн төслүүд"
-                title="Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүд"
-                crumbs={[{ label: 'Нүүр', href: '/' }, { label: 'Төслүүд' }]}
+                eyebrow={en ? 'Partnership projects' : 'Түншлэлийн төслүүд'}
+                title={
+                    en
+                        ? 'Public–private partnership projects in Umnugovi Province'
+                        : 'Өмнөговь аймагт төр, хувийн хэвшлийн түншлэлээр хэрэгжүүлэх төслүүд'
+                }
+                crumbs={[{ label: en ? 'Home' : 'Нүүр', href: '/' }, { label: en ? 'Projects' : 'Төслүүд' }]}
             />
 
             <ProjectStages />
@@ -53,28 +64,38 @@ export default function Index({
             <section className="bg-surface">
                 <Container className="py-14">
                     {/* status pills */}
-                    <div className="mb-4 flex flex-wrap gap-2">
-                        <Pill onClick={() => go({ status: null })} on={!activeStatus}>
-                            Бүх явц
-                        </Pill>
-                        {Object.entries(statusOptions).map(([k, label]) => (
-                            <Pill key={k} onClick={() => go({ status: k })} on={activeStatus === k}>
-                                {label}
+                    <div className="mb-5">
+                        <span className="mb-2 block text-[0.66rem] font-bold uppercase tracking-wide text-ink-faint">
+                            Явц
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                            <Pill onClick={() => go({ status: null })} on={!activeStatus}>
+                                Бүх явц
                             </Pill>
-                        ))}
+                            {Object.entries(statusOptions).map(([k, label]) => (
+                                <Pill key={k} onClick={() => go({ status: k })} on={activeStatus === k}>
+                                    {label}
+                                </Pill>
+                            ))}
+                        </div>
                     </div>
 
                     {/* category filter */}
                     {categories.length > 0 && (
-                        <div className="mb-8 flex flex-wrap gap-2 border-t border-line pt-4">
-                            <Pill onClick={() => go({ category: null })} on={!active}>
-                                Бүх салбар
-                            </Pill>
-                            {categories.map((c) => (
-                                <Pill key={c.slug} onClick={() => go({ category: c.slug })} on={active === c.slug}>
-                                    {c.name} <span className="opacity-60">{c.count}</span>
+                        <div className="mb-8 border-t border-line pt-5">
+                            <span className="mb-2 block text-[0.66rem] font-bold uppercase tracking-wide text-ink-faint">
+                                Салбар
+                            </span>
+                            <div className="flex flex-wrap gap-2">
+                                <Pill onClick={() => go({ category: null })} on={!active}>
+                                    Бүх салбар
                                 </Pill>
-                            ))}
+                                {categories.map((c) => (
+                                    <Pill key={c.slug} onClick={() => go({ category: c.slug })} on={active === c.slug}>
+                                        {c.name} <span className="opacity-60">{c.count}</span>
+                                    </Pill>
+                                ))}
+                            </div>
                         </div>
                     )}
 
@@ -100,8 +121,10 @@ function Pill({ children, on, onClick }: { children: React.ReactNode; on: boolea
     return (
         <button
             onClick={onClick}
-            className={`rounded-full px-3.5 py-1.5 text-[0.72rem] font-semibold transition-colors ${
-                on ? 'bg-brand-600 text-white' : 'bg-surface-sunken text-ink-soft hover:bg-brand-tint hover:text-link'
+            className={`rounded-full border px-3.5 py-1.5 text-[0.72rem] font-semibold transition-colors ${
+                on
+                    ? 'border-brand-600 bg-brand-600 text-white'
+                    : 'border-line bg-surface-sunken text-ink-soft hover:border-brand-400 hover:bg-brand-tint hover:text-link'
             }`}
         >
             {children}

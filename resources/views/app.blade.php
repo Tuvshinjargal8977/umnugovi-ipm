@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @php $orgName = 'Өмнөговь аймгийн төслийн удирдлагын газар'; @endphp
+    @php $orgName = 'Өмнөговь аймгийн төслийн нэгдсэн удирдлагын газар'; @endphp
 
     {{-- Dark горимыг зураг зурахаас өмнө тохируулж, "гялбаа"-аас сэргийлнэ --}}
     <script>

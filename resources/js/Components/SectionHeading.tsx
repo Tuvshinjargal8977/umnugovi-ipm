@@ -16,9 +16,9 @@ export default function SectionHeading({
     return (
         <div className="mb-7">
             {eyebrow && <span className="eyebrow mb-2">{eyebrow}</span>}
-            <div className="flex items-end gap-5">
-                <h2 className={`m-0 shrink-0 font-bold leading-tight text-ink ${text}`}>{children}</h2>
-                <span className="mb-1.5 h-px flex-1 bg-line" />
+            <div className="flex flex-wrap items-end gap-x-5 gap-y-2">
+                <h2 className={`m-0 min-w-0 font-bold leading-tight text-ink ${text}`}>{children}</h2>
+                <span className="mb-1.5 h-px min-w-5 flex-1 bg-line" />
                 {action && (
                     <Link
                         href={action.href}

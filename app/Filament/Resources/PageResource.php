@@ -35,6 +35,7 @@ class PageResource extends Resource
             Forms\Components\Toggle::make('is_published')->label('Нийтлэгдсэн')->default(true),
             Forms\Components\TextInput::make('sort')->label('Эрэмбэ')->numeric()->default(0),
             Forms\Components\FileUpload::make('cover_image')->label('Нүүр зураг')->image()
+                ->placeholder('Файлаа энд чирж оруулах эсвэл дарж сонгоно уу')
                 ->disk('public')->directory('pages')->columnSpanFull()
                 ->maxSize(5120)
                 ->imageResizeMode('contain')->imageResizeUpscale(false)

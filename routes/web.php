@@ -17,6 +17,9 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::post('/projects/{project}/proposal', [ProjectController::class, 'submitProposal'])
+    ->middleware('throttle:5,1')
+    ->name('projects.proposal');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');

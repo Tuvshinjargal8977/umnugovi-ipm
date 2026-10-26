@@ -89,10 +89,54 @@ class ProjectResource extends Resource
                         ->fileAttachmentsDirectory('projects/body'),
                 ]),
 
+                Forms\Components\Tabs\Tab::make('Материал')->schema([
+                    Forms\Components\Repeater::make('materials')
+                        ->relationship()
+                        ->label('Санал ирүүлэхэд шаардагдах материал')
+                        ->schema([
+                            Forms\Components\TextInput::make('name')
+                                ->label('Материалын нэр')
+                                ->required()
+                                ->columnSpan(1),
+                            Forms\Components\Toggle::make('is_required')
+                                ->label('Заавал')
+                                ->default(true)
+                                ->columnSpan(1),
+                            Forms\Components\Textarea::make('description')
+                                ->label('Бүрдүүлэх агуулга')
+                                ->rows(2)
+                                ->columnSpanFull(),
+                            Forms\Components\FileUpload::make('template_file')
+                                ->label('Загвар файл (татах)')
+                                ->placeholder('Файлаа энд чирж оруулах эсвэл дарж сонгоно уу')
+                                ->disk('public')
+                                ->directory('projects/materials')
+                                ->downloadable()
+                                ->openable()
+                                ->maxSize(10240)
+                                ->columnSpanFull(),
+                            Forms\Components\TextInput::make('external_url')
+                                ->label('Гадаад холбоос (жишээ нь Google Form)')
+                                ->url()
+                                ->placeholder('https://docs.google.com/forms/d/...')
+                                ->helperText('Хэрэв бөглөсөн бол санал илгээх хэсэгт файл хавсаргахын оронд энэ холбоос руу чиглүүлнэ.')
+                                ->columnSpanFull(),
+                        ])
+                        ->columns(2)
+                        ->orderColumn('sort')
+                        ->reorderableWithButtons()
+                        ->collapsible()
+                        ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                        ->addActionLabel('Материал нэмэх')
+                        ->defaultItems(0)
+                        ->columnSpanFull(),
+                ]),
+
                 Forms\Components\Tabs\Tab::make('Медиа')->schema([
                     Forms\Components\FileUpload::make('cover_image')
                         ->label('Нүүр зураг')
                         ->image()
+                        ->placeholder('Файлаа энд чирж оруулах эсвэл дарж сонгоно уу')
                         ->disk('public')->directory('projects')
                         ->maxSize(5120)
                         ->imageResizeMode('contain')
@@ -104,6 +148,7 @@ class ProjectResource extends Resource
                     Forms\Components\FileUpload::make('gallery')
                         ->label('Зургийн цомог')
                         ->image()->multiple()->reorderable()
+                        ->placeholder('Файлаа энд чирж оруулах эсвэл дарж сонгоно уу')
                         ->disk('public')->directory('projects/gallery')
                         ->maxFiles(12)
                         ->maxSize(5120)

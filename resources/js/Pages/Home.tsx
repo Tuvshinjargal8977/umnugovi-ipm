@@ -75,13 +75,13 @@ export default function Home({
                         <div className="flex max-w-3xl flex-col gap-5">
                             <span className="eyebrow text-accent-soft">Түншлэлийн төсөл</span>
                             <div className="flex items-center gap-2">
-                                <span className="rounded-full bg-accent px-3 py-1 text-[0.6rem] font-bold uppercase tracking-wider text-white">
+                                <span className="rounded-full bg-white px-3 py-1 text-[0.6rem] font-bold uppercase tracking-wider text-brand-700">
                                     {slides[active].status_label}
                                 </span>
                             </div>
-                            <h2 className="text-[1.7rem] font-bold uppercase leading-[1.15] text-white md:text-[2.2rem]">
+                            <h1 className="text-[1.7rem] font-bold uppercase leading-[1.15] text-white md:text-[2.2rem]">
                                 {slides[active].title}
-                            </h2>
+                            </h1>
                             <div className="flex flex-wrap gap-3">
                                 <ButtonLink href={`/projects/${slides[active].slug}`} variant="primary">
                                     Дэлгэрэнгүй <i className="bi bi-arrow-right" />
@@ -215,7 +215,7 @@ export default function Home({
                         {['Азийн хөгжлийн банк', 'Дэлхийн банк', 'НҮБ-ын хөгжлийн хөтөлбөр', 'Эдийн засаг, хөгжлийн яам'].map((p) => (
                             <div
                                 key={p}
-                                className="flex h-20 items-center justify-center rounded-card bg-surface-sunken p-3 text-center text-[0.78rem] font-bold text-ink-faint ring-1 ring-line-soft"
+                                className="flex h-20 items-center justify-center rounded-card bg-surface-sunken p-3 text-center text-[0.78rem] font-bold text-ink-soft ring-1 ring-line-soft"
                             >
                                 {p}
                             </div>

@@ -97,13 +97,18 @@ export default function Footer() {
                         <div>
                             <FooterTitle>Бидэнтэй нэгдэх</FooterTitle>
                             <div className="flex gap-3">
-                                {['facebook', 'twitter-x', 'youtube'].map((i) => (
+                                {[
+                                    { icon: 'facebook', label: 'Facebook' },
+                                    { icon: 'twitter-x', label: 'X (Twitter)' },
+                                    { icon: 'youtube', label: 'YouTube' },
+                                ].map((s) => (
                                     <a
-                                        key={i}
+                                        key={s.icon}
                                         href={site.facebook || '#'}
+                                        aria-label={s.label}
                                         className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 hover:bg-white/10"
                                     >
-                                        <i className={`bi bi-${i}`} />
+                                        <i className={`bi bi-${s.icon}`} />
                                     </a>
                                 ))}
                             </div>
@@ -114,6 +119,7 @@ export default function Footer() {
                         <FooterTitle>Газрын зураг</FooterTitle>
                         <iframe
                             src={site.mapEmbed}
+                            title="Газрын зураг"
                             loading="lazy"
                             className="aspect-[16/9] w-full rounded-lg border-0"
                         />
@@ -133,10 +139,10 @@ export default function Footer() {
 
 function FooterTitle({ children }: { children: React.ReactNode }) {
     return (
-        <h4 className="mb-4 flex items-center gap-3 text-[0.72rem] font-bold uppercase text-white">
+        <p className="mb-4 flex items-center gap-3 text-[0.72rem] font-bold uppercase text-white">
             {children}
             <span className="h-px flex-1 bg-gradient-to-r from-white/80 to-transparent" />
-        </h4>
+        </p>
     );
 }
 

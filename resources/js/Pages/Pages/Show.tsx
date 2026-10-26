@@ -29,7 +29,7 @@ export default function Show({
                 <Container className="py-14">
                     <div className={siblings.length > 0 ? 'grid gap-10 lg:grid-cols-[16rem_1fr]' : ''}>
                         {siblings.length > 0 && (
-                            <aside className="order-2 lg:order-1">
+                            <div className="order-2 lg:order-1">
                                 <div className="lg:sticky lg:top-28">
                                     <div className="mb-3 flex items-center gap-3">
                                         <h2 className="m-0 text-base font-bold text-ink">Холбоотой хуудас</h2>
@@ -52,7 +52,7 @@ export default function Show({
                                         ))}
                                     </ul>
                                 </div>
-                            </aside>
+                            </div>
                         )}
 
                         <div className="order-1 lg:order-2">

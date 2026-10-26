@@ -24,6 +24,15 @@ export default function Header() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    // Header нь Inertia-ийн persistent layout-ийн хэсэг тул хуудас шилжихэд
+    // дахин mount хийгдэхгүй — дарсан цэсний линк focus хэвээр үлдэж,
+    // :focus-within-ээр нээлттэй байдаг dropdown-г хаахгүй орхидог. Тиймээс
+    // хуудас шилжих бүрт идэвхтэй элементээс focus-ийг цэвэрлэнэ.
+    useEffect(() => {
+        (document.activeElement as HTMLElement | null)?.blur();
+        setOpen(false);
+    }, [url]);
+
     const submitSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (q.trim().length >= 2) router.get('/search', { q }, { preserveState: false });
@@ -107,7 +116,7 @@ export default function Header() {
             </div>
 
             {/* main nav */}
-            <nav className="hidden border-t border-white/10 bg-brand-900 xl:block">
+            <nav aria-label="Үндсэн цэс" className="hidden border-t border-white/10 bg-brand-900 xl:block">
                 <Container>
                     <ul className="flex justify-center">
                         {nav.map((item) => {

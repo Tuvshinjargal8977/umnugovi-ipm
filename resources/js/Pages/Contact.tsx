@@ -10,7 +10,8 @@ const field = 'w-full rounded-md border border-line px-3 py-2 text-[0.8rem] outl
 const label = 'mb-1 block text-[0.72rem] font-semibold text-ink';
 
 export default function Contact() {
-    const { site, flash } = usePage<SharedProps>().props;
+    const { site, flash, locale } = usePage<SharedProps>().props;
+    const en = locale === 'en';
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -34,10 +35,17 @@ export default function Contact() {
     return (
         <>
             <Seo
-                title="Холбоо барих"
-                description={`Өмнөговь аймгийн Төслийн удирдлагын газартай холбоо барих — ${site.address}, ${site.phone}, ${site.email}.`}
+                title={en ? 'Contact us' : 'Холбоо барих'}
+                description={
+                    en
+                        ? `Contact the Integrated Project Management Office of Umnugovi Province — ${site.address}, ${site.phone}, ${site.email}.`
+                        : `Өмнөговь аймгийн Төслийн нэгдсэн удирдлагын газартай холбоо барих — ${site.address}, ${site.phone}, ${site.email}.`
+                }
             />
-            <PageHero title="Холбоо барих" crumbs={[{ label: 'Нүүр', href: '/' }, { label: 'Холбоо барих' }]} />
+            <PageHero
+                title={en ? 'Contact us' : 'Холбоо барих'}
+                crumbs={[{ label: en ? 'Home' : 'Нүүр', href: '/' }, { label: en ? 'Contact us' : 'Холбоо барих' }]}
+            />
 
             <section className="bg-surface">
                 <Container className="py-12">
@@ -54,7 +62,12 @@ export default function Contact() {
                                     </div>
                                 </div>
                             ))}
-                            <iframe src={site.mapEmbed} loading="lazy" className="aspect-[16/10] w-full rounded-lg border-0" />
+                            <iframe
+                                src={site.mapEmbed}
+                                title="Газрын зураг"
+                                loading="lazy"
+                                className="aspect-[16/10] w-full rounded-lg border-0"
+                            />
                         </div>
 
                         <div>

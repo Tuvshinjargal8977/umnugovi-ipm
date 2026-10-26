@@ -31,5 +31,5 @@ if (-not (Test-Path 'database\database.sqlite')) { New-Item -ItemType File 'data
 & $php artisan storage:link 2>$null
 
 # Vite dev server (арын процесс) + Laravel server
-Start-Process -NoNewWindow npm -ArgumentList 'run','dev'
+Start-Process -NoNewWindow -FilePath 'cmd.exe' -ArgumentList '/c', 'npm', 'run', 'dev'
 & $php artisan serve --host=127.0.0.1 --port=8000

@@ -26,7 +26,7 @@ export interface SharedProps extends InertiaPageProps {
     nav: NavItem[];
     locale: string;
     locales: string[];
-    flash: { success?: string | null };
+    flash: { success?: string | null; proposalSent?: string | null };
 }
 
 export interface Paginated<T> {
@@ -45,6 +45,15 @@ export interface ProjectCard {
     category?: { name: string; slug: string } | null;
 }
 
+export interface ProjectMaterial {
+    id: number;
+    name: string;
+    description: string | null;
+    is_required: boolean;
+    template_url: string | null;
+    external_url: string | null;
+}
+
 export interface Project extends ProjectCard {
     summary: string | null;
     body: string | null;
@@ -59,6 +68,7 @@ export interface Project extends ProjectCard {
     preliminary_assessment_at: string | null;
     info_meeting_at: string | null;
     detail_image: string | null;
+    materials: ProjectMaterial[];
 }
 
 export interface PostCard {

@@ -1,5 +1,5 @@
-import { Link } from '@inertiajs/react';
-import type { Paginated, PostCard as PostT, PostCategory } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import type { Paginated, PostCard as PostT, PostCategory, SharedProps } from '@/types';
 import Container from '@/Components/Container';
 import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
@@ -17,20 +17,27 @@ export default function Index({
     categories: PostCategory[];
     active: string | null;
 }) {
+    const { locale } = usePage<SharedProps>().props;
+    const en = locale === 'en';
     const activeCat = categories.find((c) => c.slug === active);
-    const title = activeCat ? activeCat.name : 'Мэдээ мэдээлэл';
+    const newsLabel = en ? 'News' : 'Мэдээ мэдээлэл';
+    const title = activeCat ? activeCat.name : newsLabel;
 
     return (
         <>
             <Seo
                 title={title}
-                description={`Өмнөговь аймгийн Төслийн удирдлагын газрын ${title.toLowerCase()} — мэдээ, зарлал, арга хэмжээ, сонгон шалгаруулалт.`}
+                description={
+                    en
+                        ? `${title} from the Integrated Project Management Office of Umnugovi Province — news, announcements, events, tenders.`
+                        : `Өмнөговь аймгийн Төслийн нэгдсэн удирдлагын газрын ${title.toLowerCase()} — мэдээ, зарлал, арга хэмжээ, сонгон шалгаруулалт.`
+                }
             />
             <PageHero
                 title={title}
                 crumbs={[
-                    { label: 'Нүүр', href: '/' },
-                    { label: 'Мэдээ мэдээлэл', href: '/posts' },
+                    { label: en ? 'Home' : 'Нүүр', href: '/' },
+                    { label: newsLabel, href: '/posts' },
                     ...(activeCat ? [{ label: activeCat.name }] : []),
                 ]}
             />
@@ -38,28 +45,30 @@ export default function Index({
             <section className="bg-surface">
                 <Container className="py-12">
                     <div className="grid gap-8 lg:grid-cols-[16rem_1fr]">
-                        <aside className="order-2 lg:order-1">
+                        <div className="order-2 lg:order-1">
                             <PostSidebar categories={categories} active={active} />
-                        </aside>
+                        </div>
 
                         <div className="order-1 lg:order-2">
                             {posts.data.length === 0 ? (
-                                <p className="text-ink-soft">Энэ ангилалд нийтэлсэн мэдээ алга.</p>
+                                <p className="text-ink-soft">
+                                    {en ? 'No posts published in this category yet.' : 'Энэ ангилалд нийтэлсэн мэдээ алга.'}
+                                </p>
                             ) : (
                                 <>
                                     <div className="flex flex-col divide-y divide-line">
                                         {posts.data.map((p) => (
                                             <article key={p.slug} className="flex flex-col gap-4 py-6 first:pt-0 sm:flex-row">
-                                                <Link href={`/posts/${p.slug}`} className="shrink-0">
+                                                <Link href={`/posts/${p.slug}`} aria-label={p.title} className="shrink-0">
                                                     <img
                                                         src={p.cover || FALLBACK}
-                                                        alt={p.cover ? p.title : ''}
+                                                        alt=""
                                                         loading="lazy"
                                                         className="aspect-[16/10] w-full rounded-lg object-cover sm:w-56"
                                                     />
                                                 </Link>
                                                 <div>
-                                                    <div className="flex flex-wrap gap-3 text-[0.7rem] text-ink-faint">
+                                                    <div className="flex flex-wrap gap-3 text-[0.7rem] text-ink-soft">
                                                         <span>
                                                             <i className="bi bi-calendar3 mr-1" />
                                                             {p.published_at}

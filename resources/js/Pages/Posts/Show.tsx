@@ -29,7 +29,10 @@ export default function Show({
                 {post.cover && <img src={post.cover} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />}
                 <div className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-900/90 to-brand-500/70" />
                 <Container className="flex flex-col gap-3 py-12 lg:py-16">
-                    <nav className="flex flex-wrap items-center gap-2 text-[0.6rem] font-bold uppercase tracking-wide text-white/90">
+                    <nav
+                        aria-label="breadcrumb"
+                        className="flex flex-wrap items-center gap-2 text-[0.6rem] font-bold uppercase tracking-wide text-white/90"
+                    >
                         <Link href="/">Нүүр</Link>
                         <span className="text-white/50">/</span>
                         <Link href="/posts">Мэдээ мэдээлэл</Link>
@@ -72,15 +75,16 @@ export default function Show({
                                 </ButtonLink>
                                 <div className="ml-auto flex gap-2">
                                     {[
-                                        { i: 'facebook', u: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}` },
-                                        { i: 'twitter-x', u: `https://twitter.com/intent/tweet?url=${shareUrl}` },
-                                        { i: 'envelope', u: `mailto:?body=${shareUrl}` },
+                                        { i: 'facebook', label: 'Facebook-т хуваалцах', u: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}` },
+                                        { i: 'twitter-x', label: 'X-д хуваалцах', u: `https://twitter.com/intent/tweet?url=${shareUrl}` },
+                                        { i: 'envelope', label: 'Имэйлээр илгээх', u: `mailto:?body=${shareUrl}` },
                                     ].map((s) => (
                                         <a
                                             key={s.i}
                                             href={s.u}
                                             target="_blank"
                                             rel="noopener"
+                                            aria-label={s.label}
                                             className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:border-brand-500 hover:bg-brand-500 hover:text-white"
                                         >
                                             <i className={`bi bi-${s.i}`} />
@@ -90,7 +94,7 @@ export default function Show({
                             </div>
                         </div>
 
-                        <aside className="flex flex-col gap-8">
+                        <div className="flex flex-col gap-8">
                             <PostSidebar categories={categories} active={post.category?.slug} />
                             <div>
                                 <div className="mb-3 flex items-center gap-3">
@@ -101,7 +105,7 @@ export default function Show({
                                     {recent.map((r) => (
                                         <li key={r.slug}>
                                             <Link href={`/posts/${r.slug}`} className="flex flex-col">
-                                                <span className="text-[0.7rem] text-ink-faint">{r.published_at}</span>
+                                                <span className="text-[0.7rem] text-ink-soft">{r.published_at}</span>
                                                 <span className="font-semibold leading-snug text-ink hover:text-link">
                                                     {r.title}
                                                 </span>
@@ -110,7 +114,7 @@ export default function Show({
                                     ))}
                                 </ul>
                             </div>
-                        </aside>
+                        </div>
                     </div>
                 </Container>
             </section>

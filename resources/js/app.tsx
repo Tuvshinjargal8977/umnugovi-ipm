@@ -7,7 +7,8 @@ import SiteLayout from '@/Layouts/SiteLayout';
 import type { ReactElement } from 'react';
 
 createInertiaApp({
-    title: (title) => (title ? `${title} — Өмнөговь аймгийн төслийн удирдлагын газар` : 'Өмнөговь аймгийн төслийн удирдлагын газар'),
+    title: (title) =>
+        title ? `${title} — Өмнөговь аймгийн төслийн нэгдсэн удирдлагын газар` : 'Өмнөговь аймгийн төслийн нэгдсэн удирдлагын газар',
     resolve: async (name) => {
         const page: any = await resolvePageComponent(
             `./Pages/${name}.tsx`,

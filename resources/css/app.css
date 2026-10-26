@@ -22,8 +22,9 @@
     --color-brand-900: #14315a;
     --color-brand-950: #0d2140;
 
-    /* IPM / сүлдний алтан аялгуу */
-    --color-accent: #b98f3f;
+    /* IPM / сүлдний алтан аялгуу. Light горимд текст болгон хэрэглэхэд WCAG AA (4.5:1)
+       давахын тулд бараан хувилбар; dark горимд доор .dark блокт анхны тод алтан өнгийг сэргээнэ. */
+    --color-accent: #8a6b2f;
     --color-accent-soft: #d9b978;
 
     --radius-card: 0.875rem;
@@ -45,6 +46,7 @@
 .dark {
     color-scheme: dark;
 
+    --color-accent: #b98f3f;
     --color-ink: #e8ecf3;
     --color-ink-soft: #a2afc1;
     --color-ink-faint: #7a8697;
@@ -104,13 +106,17 @@
     font-weight: 600;
 }
 
-/* Дэлгэрэнгүй хэсгийн хажуугийн алтан зураас бүхий гарчиг */
-.eyebrow {
-    @apply inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-accent;
-}
-.eyebrow::before {
-    content: '';
-    @apply block h-px w-6 bg-accent;
+/* Дэлгэрэнгүй хэсгийн хажуугийн алтан зураас бүхий гарчиг.
+   @layer components-д байрлуулснаар жишээ нь text-accent-soft мэт
+   utility класс хэрэв нэмж бичвэл үүнийг зөв дарж бичих боломжтой болно. */
+@layer components {
+    .eyebrow {
+        @apply inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-accent;
+    }
+    .eyebrow::before {
+        content: '';
+        @apply block h-px w-6 bg-accent;
+    }
 }
 
 /* Rich text (Filament RichEditor output) */

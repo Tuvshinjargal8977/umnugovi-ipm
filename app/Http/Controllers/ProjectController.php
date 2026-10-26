@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -58,7 +59,7 @@ class ProjectController extends Controller
 
         $galleryFirst = ! empty($project->gallery) ? $project->gallery[0] : null;
 
-        $related = Project::query()->published()
+        $related = Project::query()->published()->with('category')
             ->where('id', '!=', $project->id)
             ->where('project_category_id', $project->project_category_id)
             ->limit(3)->get()
@@ -82,8 +83,61 @@ class ProjectController extends Controller
                 'detail_image' => $galleryFirst
                     ? Storage::url($galleryFirst)
                     : ($project->cover_image ? Storage::url($project->cover_image) : null),
+                'materials' => $project->materials->map(fn ($m) => [
+                    'id' => $m->id,
+                    'name' => $m->name,
+                    'description' => $m->description,
+                    'is_required' => $m->is_required,
+                    'template_url' => $m->template_file ? Storage::url($m->template_file) : null,
+                    'external_url' => $m->external_url,
+                ]),
             ],
             'related' => $related,
         ]);
+    }
+
+    public function submitProposal(Request $request, Project $project)
+    {
+        abort_unless($project->status === 'open_for_proposals', 404);
+
+        $materials = $project->materials;
+
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+            'organization' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'note' => ['nullable', 'string', 'max:2000'],
+            'website' => ['nullable', 'string', 'max:255'], // honeypot
+            'files' => ['nullable', 'array'],
+            'files.*' => ['file', 'mimes:pdf,xlsx,xls,csv', 'max:10240'],
+        ];
+
+        foreach ($materials->where('is_required', true)->whereNull('external_url') as $material) {
+            $rules["files.{$material->id}"] = ['required', 'file', 'mimes:pdf,xlsx,xls,csv', 'max:10240'];
+        }
+
+        $data = $request->validate($rules);
+
+        if (! empty($data['website'])) {
+            return back()->with('proposal_sent', true);
+        }
+
+        $proposal = $project->proposals()->create(
+            collect($data)->only(['name', 'organization', 'phone', 'email', 'note'])->all()
+        );
+
+        $materialIds = $materials->pluck('id')->all();
+
+        foreach ($request->file('files', []) as $materialId => $file) {
+            $path = $file->store('proposals/' . $project->id, 'public');
+            $proposal->files()->create([
+                'project_material_id' => in_array((int) $materialId, $materialIds, true) ? (int) $materialId : null,
+                'file_path' => $path,
+                'original_name' => $file->getClientOriginalName(),
+            ]);
+        }
+
+        return back()->with('proposal_sent', true);
     }
 }

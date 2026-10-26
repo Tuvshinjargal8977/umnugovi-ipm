@@ -41,6 +41,7 @@ class PostResource extends Resource
             Forms\Components\TextInput::make('author')->label('Нийтэлсэн')->default('Төр, хувийн хэвшлийн түншлэлийн төв'),
             Forms\Components\DateTimePicker::make('published_at')->label('Нийтэлсэн огноо')->seconds(false)->default(now()),
             Forms\Components\FileUpload::make('cover_image')->label('Нүүр зураг')->image()
+                ->placeholder('Файлаа энд чирж оруулах эсвэл дарж сонгоно уу')
                 ->disk('public')->directory('posts')->columnSpanFull()
                 ->maxSize(5120)
                 ->imageResizeMode('contain')->imageResizeUpscale(false)

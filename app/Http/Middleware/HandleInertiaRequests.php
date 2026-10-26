@@ -20,7 +20,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
 
             'site' => [
-                'name' => 'Өмнөговь аймгийн төслийн удирдлагын газар',
+                'name' => 'Өмнөговь аймгийн төслийн нэгдсэн удирдлагын газар',
                 'nameShort' => 'IPM',
                 'emblem' => '/images/emblem.svg',       // Өмнөговь аймгийн сүлд (түр орлуулагч — .png-ээр солиж болно)
                 'logo' => '/images/ipm-logo.svg',       // IPM wordmark
@@ -74,6 +74,9 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'success' => fn () => $request->hasSession() && $request->session()->get('contact_sent')
                     ? 'Таны хүсэлт амжилттай илгээгдлээ. Баярлалаа!'
+                    : null,
+                'proposalSent' => fn () => $request->hasSession() && $request->session()->get('proposal_sent')
+                    ? 'Таны санал амжилттай илгээгдлээ. Баярлалаа!'
                     : null,
             ],
         ];

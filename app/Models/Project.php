@@ -6,6 +6,7 @@ use App\Models\Concerns\FlushesHomeCache;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 class Project extends Model
@@ -47,6 +48,16 @@ class Project extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(ProjectCategory::class, 'project_category_id');
+    }
+
+    public function materials(): HasMany
+    {
+        return $this->hasMany(ProjectMaterial::class)->orderBy('sort');
+    }
+
+    public function proposals(): HasMany
+    {
+        return $this->hasMany(ProjectProposal::class);
     }
 
     public function scopePublished(Builder $query): Builder
