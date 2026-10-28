@@ -91,18 +91,14 @@ function ProposalForm({ project }: { project: Project }) {
     const formRef = useRef<HTMLDivElement>(null);
     const { data, setData, post, processing, errors, reset, recentlySuccessful } = useForm<{
         name: string;
-        organization: string;
         phone: string;
         email: string;
-        note: string;
         website: string;
         files: Record<number, File | null>;
     }>({
         name: '',
-        organization: '',
         phone: '',
         email: '',
-        note: '',
         website: '',
         files: {},
     });
@@ -174,7 +170,7 @@ function ProposalForm({ project }: { project: Project }) {
                                 <h3 className="text-[0.95rem] font-bold text-ink">Таны мэдээлэл</h3>
                             </div>
                             <div className="grid gap-4 sm:grid-cols-2">
-                                <div>
+                                <div className="sm:col-span-2">
                                     <label className={label} htmlFor="p-name">
                                         Нэр / Байгууллагын төлөөлөл <span className="text-red-500">*</span>
                                     </label>
@@ -189,18 +185,6 @@ function ProposalForm({ project }: { project: Project }) {
                                     {errors.name && (
                                         <p className="mt-1 text-[0.72rem] text-red-600 dark:text-red-400">{errors.name}</p>
                                     )}
-                                </div>
-                                <div>
-                                    <label className={label} htmlFor="p-organization">
-                                        Байгууллага
-                                    </label>
-                                    <input
-                                        id="p-organization"
-                                        className={field}
-                                        placeholder="Жишээ: ХХК"
-                                        value={data.organization}
-                                        onChange={(e) => setData('organization', e.target.value)}
-                                    />
                                 </div>
                                 <div>
                                     <label className={label} htmlFor="p-phone">
@@ -225,18 +209,6 @@ function ProposalForm({ project }: { project: Project }) {
                                         placeholder="jishee@email.mn"
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
-                                    />
-                                </div>
-                                <div className="sm:col-span-2">
-                                    <label className={label} htmlFor="p-note">
-                                        Нэмэлт тайлбар
-                                    </label>
-                                    <textarea
-                                        id="p-note"
-                                        rows={3}
-                                        className={field}
-                                        value={data.note}
-                                        onChange={(e) => setData('note', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -449,71 +421,6 @@ export default function Show({ project, related }: { project: Project; related: 
                                 )}
                             </div>
                         </div>
-                    </Container>
-                </section>
-            )}
-
-            {/* materials */}
-            {project.materials.length > 0 && (
-                <section className="border-t border-line bg-surface">
-                    <Container className="py-12">
-                        <SectionHeading>Санал ирүүлэхэд шаардагдах материалын жагсаалт</SectionHeading>
-                        <p className="-mt-4 mb-5 text-[0.8rem] text-ink-soft">
-                            <span className="text-accent">*</span> тэмдэгтэй материалыг заавал бүрдүүлнэ.
-                            {project.status === 'open_for_proposals' && ' Бэлэн болсны дараа доорх хэсэгт хавсаргаж илгээнэ үү.'}
-                        </p>
-                        <div className="overflow-x-auto rounded-card border border-line">
-                            <table className="w-full min-w-[640px] border-collapse text-left text-[0.82rem]">
-                                <thead>
-                                    <tr className="bg-brand-700 text-white">
-                                        <th className="w-12 px-4 py-3 text-center font-bold">№</th>
-                                        <th className="px-4 py-3 font-bold">Материалын нэр</th>
-                                        <th className="px-4 py-3 font-bold">Бүрдүүлэх агуулга</th>
-                                        <th className="w-28 px-4 py-3 text-center font-bold">Загвар</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {project.materials.map((m, i) => (
-                                        <tr key={i} className="border-t border-line odd:bg-surface-sunken/40">
-                                            <td className="px-4 py-3 text-center text-ink-soft">{i + 1}</td>
-                                            <td className="px-4 py-3 font-bold text-ink">
-                                                {m.name}
-                                                {m.is_required && <span className="ml-1 text-accent">*</span>}
-                                            </td>
-                                            <td className="px-4 py-3 text-ink-soft">{m.description || '—'}</td>
-                                            <td className="px-4 py-3 text-center">
-                                                {m.template_url ? (
-                                                    <a
-                                                        href={m.template_url}
-                                                        className="inline-flex items-center gap-1 text-[0.72rem] font-bold uppercase tracking-wide text-brand-600 hover:text-accent"
-                                                    >
-                                                        <i className="bi bi-download" /> Татах
-                                                    </a>
-                                                ) : m.external_url ? (
-                                                    <a
-                                                        href={m.external_url}
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        className="inline-flex items-center gap-1 text-[0.72rem] font-bold uppercase tracking-wide text-brand-600 hover:text-accent"
-                                                    >
-                                                        <i className="bi bi-box-arrow-up-right" /> Бөглөх
-                                                    </a>
-                                                ) : (
-                                                    <span className="text-ink-soft">-</span>
-                                                )}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        {project.status === 'open_for_proposals' && (
-                            <div className="mt-5">
-                                <ButtonLink href="#proposal" variant="primary">
-                                    Материалаа бэлдсэн <i className="bi bi-arrow-down-circle-fill" />
-                                </ButtonLink>
-                            </div>
-                        )}
                     </Container>
                 </section>
             )}
