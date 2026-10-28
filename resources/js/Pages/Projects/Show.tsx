@@ -7,7 +7,7 @@ import Seo from '@/Components/Seo';
 import PageHero from '@/Components/PageHero';
 import SectionHeading from '@/Components/SectionHeading';
 import ProjectCard from '@/Components/ProjectCard';
-import { Button, ButtonLink } from '@/Components/Button';
+import { Button } from '@/Components/Button';
 
 const FALLBACK = '/images/placeholder.svg';
 
@@ -19,16 +19,6 @@ function StepBadge({ n }: { n: number }) {
         <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-[0.72rem] font-bold text-white">
             {n}
         </span>
-    );
-}
-
-function Fact({ k, v }: { k: string; v: string | null }) {
-    if (!v) return null;
-    return (
-        <li className="flex gap-3 border-b border-dashed border-line py-2.5 text-[0.78rem] last:border-0">
-            <span className="min-w-40 font-bold text-ink">{k}</span>
-            <span className="text-ink-soft">{v}</span>
-        </li>
     );
 }
 
@@ -355,28 +345,6 @@ export default function Show({ project, related }: { project: Project; related: 
                         </figure>
                         <div className="flex flex-col gap-6">
                             <h2 className="text-[1.5rem] font-bold leading-tight text-ink md:text-[1.7rem]">{project.title}</h2>
-                            <ul className="m-0 list-none p-0">
-                                <Fact k="Явц:" v={project.status_label} />
-                                <Fact k="Төсөл санаачлагч:" v={project.proponent} />
-                                <Fact k="Төслийн явц:" v={project.phase} />
-                                <Fact k="Судлагдсан байдал:" v={project.study_status} />
-                                <Fact k="Гэрээний төрөл:" v={project.contract_type} />
-                                <Fact k="Гэрээний хугацаа:" v={project.contract_duration} />
-                                <Fact k="Урьдчилсан үнэлгээ:" v={project.preliminary_assessment_at} />
-                                <Fact k="Мэдээллийн уулзалт:" v={project.info_meeting_at} />
-                                <Fact k="Санал авах хугацаа:" v={project.proposal_deadline} />
-                            </ul>
-                            <div className="flex flex-wrap gap-2">
-                                <ButtonLink href="#detail" variant="primary">
-                                    Дэлгэрэнгүй <i className="bi bi-arrow-right-circle-fill" />
-                                </ButtonLink>
-                                <ButtonLink
-                                    href={project.status === 'open_for_proposals' ? '#proposal' : '/contact-us'}
-                                    variant="ghost"
-                                >
-                                    <i className="bi bi-file-earmark-medical-fill" /> Санал илгээх
-                                </ButtonLink>
-                            </div>
                         </div>
                     </div>
                 </Container>
