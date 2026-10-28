@@ -22,11 +22,11 @@ class HandleInertiaRequests extends Middleware
             'site' => [
                 'name' => 'Өмнөговь аймгийн төслийн нэгдсэн удирдлагын газар',
                 'nameShort' => 'IPM',
-                'emblem' => '/images/emblem.svg',       // Өмнөговь аймгийн сүлд (түр орлуулагч — .png-ээр солиж болно)
+                'emblem' => '/images/emblem-official.jpg', // Байгууллагын албан ёсны IPM тэмдэг (эх сурвалж: gov.mn/org/integrated)
                 'logo' => '/images/ipm-logo.svg',       // IPM wordmark
-                'phone' => '(+976) 7053-0000',
-                'email' => 'info@umnugovi-pmo.mn',
-                'address' => 'Даланзадгад сум, Өмнөговь аймаг, Монгол Улс',
+                'phone' => '(+976) 7053-0012',
+                'email' => 'ipmo@omnogovi.gov.mn',
+                'address' => 'Өмнөговь аймаг, Даланзадгад сум, Далан 3 дугаар баг, Нутгийн удирдлагын ордон, 105, 114 тоот',
                 'facebook' => null,
                 'mapEmbed' => 'https://maps.google.com/maps?q=43.5708,104.4250&hl=mn&z=13&output=embed',
                 'heroImage' => '/images/hero-bg.svg',
