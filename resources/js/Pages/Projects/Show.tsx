@@ -340,12 +340,14 @@ export default function Show({ project, related }: { project: Project; related: 
                         {project.summary && <p className="text-[0.9rem] leading-relaxed text-ink">{project.summary}</p>}
                         <hr className="my-1 border-line" />
                         <div className="grid items-start gap-8 md:grid-cols-2">
-                            <img
-                                src={project.detail_image || FALLBACK}
-                                alt={project.detail_image ? project.title : ''}
-                                loading="lazy"
-                                className="w-full rounded-lg border border-line"
-                            />
+                            <div className="overflow-hidden rounded-lg border border-line md:sticky md:top-[7.5rem]">
+                                <img
+                                    src={project.detail_image || FALLBACK}
+                                    alt={project.detail_image ? project.title : ''}
+                                    loading="lazy"
+                                    className="w-full"
+                                />
+                            </div>
                             <div className="prose-cms">
                                 {project.body && <div dangerouslySetInnerHTML={{ __html: project.body }} />}
                                 {project.policy_reference && (
