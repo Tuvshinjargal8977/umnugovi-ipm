@@ -332,24 +332,6 @@ export default function Show({ project, related }: { project: Project; related: 
                 ]}
             />
 
-            {/* summary */}
-            <section className="bg-surface">
-                <Container className="py-12">
-                    <div className="grid items-start gap-8 lg:grid-cols-2">
-                        <figure className="m-0 aspect-square overflow-hidden rounded-card border border-line bg-surface">
-                            <img
-                                src={project.cover || FALLBACK}
-                                alt={project.cover ? project.title : ''}
-                                className="h-full w-full object-cover"
-                            />
-                        </figure>
-                        <div className="flex flex-col gap-6">
-                            <h2 className="text-[1.5rem] font-bold leading-tight text-ink md:text-[1.7rem]">{project.title}</h2>
-                        </div>
-                    </div>
-                </Container>
-            </section>
-
             {/* detail */}
             {(project.body || project.policy_reference || project.financing) && (
                 <section id="detail" className="border-t border-line bg-surface">
