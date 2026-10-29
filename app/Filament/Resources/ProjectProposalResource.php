@@ -72,7 +72,7 @@ class ProjectProposalResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('project_id')->label('Төсөл')
-                    ->options(fn () => Project::query()->pluck('title', 'id')),
+                    ->options(fn () => Project::query()->get()->mapWithKeys(fn (Project $p) => [$p->id => $p->title])),
                 Tables\Filters\TernaryFilter::make('is_reviewed')->label('Хянасан эсэх'),
             ])
             ->actions([
