@@ -27,7 +27,7 @@ class HandleInertiaRequests extends Middleware
                 'phone' => '(+976) 7053-0012',
                 'email' => 'ipmo@omnogovi.gov.mn',
                 'address' => 'Өмнөговь аймаг, Даланзадгад сум, Далан 3 дугаар баг, Нутгийн удирдлагын ордон, 105, 114 тоот',
-                'facebook' => null,
+                'facebook' => 'https://www.facebook.com/profile.php?id=61573252741944',
                 'mapEmbed' => 'https://maps.google.com/maps?q=43.5708,104.4250&hl=mn&z=13&output=embed',
                 'heroImage' => '/images/hero-bg.svg',
             ],

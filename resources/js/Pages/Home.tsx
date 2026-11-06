@@ -205,7 +205,7 @@ export default function Home({
                 ),
             )}
 
-            {/* PARTNERS */}
+            {/* PARTNERS — temporarily hidden, see Home.tsx git history to restore
             <section className="border-t border-line bg-surface">
                 <Container className="py-14">
                     <SectionHeading eyebrow="Хамтын ажиллагаа" size="sm">
@@ -223,6 +223,7 @@ export default function Home({
                     </div>
                 </Container>
             </section>
+            */}
         </>
     );
 }

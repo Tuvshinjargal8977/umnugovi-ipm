@@ -1,15 +1,12 @@
-import { useForm, usePage } from '@inertiajs/react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { useEffect, useRef } from 'react';
 import type { FormEvent } from 'react';
 import type { Project, ProjectCard as ProjectT, SharedProps } from '@/types';
 import Container from '@/Components/Container';
 import Seo from '@/Components/Seo';
-import PageHero from '@/Components/PageHero';
 import SectionHeading from '@/Components/SectionHeading';
 import ProjectCard from '@/Components/ProjectCard';
-import { Button, ButtonLink } from '@/Components/Button';
-
-const FALLBACK = '/images/placeholder.svg';
+import { Button } from '@/Components/Button';
 
 const field = 'w-full rounded-md border border-line px-3 py-2 text-[0.8rem] outline-none focus:border-brand-400';
 const label = 'mb-1 block text-[0.72rem] font-semibold text-ink';
@@ -19,16 +16,6 @@ function StepBadge({ n }: { n: number }) {
         <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-[0.72rem] font-bold text-white">
             {n}
         </span>
-    );
-}
-
-function Fact({ k, v }: { k: string; v: string | null }) {
-    if (!v) return null;
-    return (
-        <li className="flex gap-3 border-b border-dashed border-line py-2.5 text-[0.78rem] last:border-0">
-            <span className="min-w-40 font-bold text-ink">{k}</span>
-            <span className="text-ink-soft">{v}</span>
-        </li>
     );
 }
 
@@ -91,18 +78,14 @@ function ProposalForm({ project }: { project: Project }) {
     const formRef = useRef<HTMLDivElement>(null);
     const { data, setData, post, processing, errors, reset, recentlySuccessful } = useForm<{
         name: string;
-        organization: string;
         phone: string;
         email: string;
-        note: string;
         website: string;
         files: Record<number, File | null>;
     }>({
         name: '',
-        organization: '',
         phone: '',
         email: '',
-        note: '',
         website: '',
         files: {},
     });
@@ -174,7 +157,7 @@ function ProposalForm({ project }: { project: Project }) {
                                 <h3 className="text-[0.95rem] font-bold text-ink">Таны мэдээлэл</h3>
                             </div>
                             <div className="grid gap-4 sm:grid-cols-2">
-                                <div>
+                                <div className="sm:col-span-2">
                                     <label className={label} htmlFor="p-name">
                                         Нэр / Байгууллагын төлөөлөл <span className="text-red-500">*</span>
                                     </label>
@@ -189,18 +172,6 @@ function ProposalForm({ project }: { project: Project }) {
                                     {errors.name && (
                                         <p className="mt-1 text-[0.72rem] text-red-600 dark:text-red-400">{errors.name}</p>
                                     )}
-                                </div>
-                                <div>
-                                    <label className={label} htmlFor="p-organization">
-                                        Байгууллага
-                                    </label>
-                                    <input
-                                        id="p-organization"
-                                        className={field}
-                                        placeholder="Жишээ: ХХК"
-                                        value={data.organization}
-                                        onChange={(e) => setData('organization', e.target.value)}
-                                    />
                                 </div>
                                 <div>
                                     <label className={label} htmlFor="p-phone">
@@ -225,18 +196,6 @@ function ProposalForm({ project }: { project: Project }) {
                                         placeholder="jishee@email.mn"
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
-                                    />
-                                </div>
-                                <div className="sm:col-span-2">
-                                    <label className={label} htmlFor="p-note">
-                                        Нэмэлт тайлбар
-                                    </label>
-                                    <textarea
-                                        id="p-note"
-                                        rows={3}
-                                        className={field}
-                                        value={data.note}
-                                        onChange={(e) => setData('note', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -360,53 +319,27 @@ export default function Show({ project, related }: { project: Project; related: 
                 image={project.cover}
                 type="article"
             />
-            <PageHero
-                title={project.title}
-                image={project.cover}
-                crumbs={[
-                    { label: 'Нүүр', href: '/' },
-                    { label: 'Төслүүд', href: '/projects' },
-                    { label: project.title.length > 40 ? project.title.slice(0, 40) + '…' : project.title },
-                ]}
-            />
 
-            {/* summary */}
-            <section className="bg-surface">
-                <Container className="py-12">
-                    <div className="grid items-start gap-8 lg:grid-cols-2">
-                        <figure className="m-0 aspect-square overflow-hidden rounded-card border border-line bg-surface">
-                            <img
-                                src={project.cover || FALLBACK}
-                                alt={project.cover ? project.title : ''}
-                                className="h-full w-full object-cover"
-                            />
-                        </figure>
-                        <div className="flex flex-col gap-6">
-                            <h2 className="text-[1.5rem] font-bold leading-tight text-ink md:text-[1.7rem]">{project.title}</h2>
-                            <ul className="m-0 list-none p-0">
-                                <Fact k="Явц:" v={project.status_label} />
-                                <Fact k="Төсөл санаачлагч:" v={project.proponent} />
-                                <Fact k="Төслийн явц:" v={project.phase} />
-                                <Fact k="Судлагдсан байдал:" v={project.study_status} />
-                                <Fact k="Гэрээний төрөл:" v={project.contract_type} />
-                                <Fact k="Гэрээний хугацаа:" v={project.contract_duration} />
-                                <Fact k="Урьдчилсан үнэлгээ:" v={project.preliminary_assessment_at} />
-                                <Fact k="Мэдээллийн уулзалт:" v={project.info_meeting_at} />
-                                <Fact k="Санал авах хугацаа:" v={project.proposal_deadline} />
-                            </ul>
-                            <div className="flex flex-wrap gap-2">
-                                <ButtonLink href="#detail" variant="primary">
-                                    Дэлгэрэнгүй <i className="bi bi-arrow-right-circle-fill" />
-                                </ButtonLink>
-                                <ButtonLink
-                                    href={project.status === 'open_for_proposals' ? '#proposal' : '/contact-us'}
-                                    variant="ghost"
-                                >
-                                    <i className="bi bi-file-earmark-medical-fill" /> Санал илгээх
-                                </ButtonLink>
-                            </div>
-                        </div>
-                    </div>
+            {/* hero — flat brand-blue gradient, matching the national PPP Center site style */}
+            <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500">
+                <img
+                    src="/images/hero-projects.jpg"
+                    alt=""
+                    className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35 mix-blend-luminosity"
+                />
+                <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-700/90 via-brand-600/80 to-brand-500/70" />
+                <Container className="flex min-h-[12rem] flex-col justify-end gap-3 py-10 md:min-h-[15rem] md:py-14">
+                    <nav
+                        aria-label="breadcrumb"
+                        className="flex flex-wrap items-center gap-2 text-[0.62rem] font-semibold uppercase tracking-wide text-white/70"
+                    >
+                        <Link href="/">Нүүр</Link>
+                        <span className="text-white/40">/</span>
+                        <Link href="/projects">Төслүүд</Link>
+                    </nav>
+                    <h1 className="max-w-4xl text-[1.5rem] font-black uppercase leading-[1.25] text-white md:text-[2rem]">
+                        {project.title}
+                    </h1>
                 </Container>
             </section>
 
@@ -417,14 +350,18 @@ export default function Show({ project, related }: { project: Project; related: 
                         <SectionHeading>Төслийн дэлгэрэнгүй мэдээлэл</SectionHeading>
                         {project.summary && <p className="text-[0.9rem] leading-relaxed text-ink">{project.summary}</p>}
                         <hr className="my-1 border-line" />
-                        <div className="grid items-start gap-8 md:grid-cols-2">
-                            <img
-                                src={project.detail_image || FALLBACK}
-                                alt={project.detail_image ? project.title : ''}
-                                loading="lazy"
-                                className="w-full rounded-lg border border-line"
-                            />
-                            <div className="prose-cms">
+                        <div className={project.detail_image ? 'grid items-start gap-8 md:grid-cols-[5fr_6fr]' : ''}>
+                            {project.detail_image && (
+                                <div className="overflow-hidden rounded-lg border border-line md:sticky md:top-[7.5rem]">
+                                    <img
+                                        src={project.detail_image}
+                                        alt={project.title}
+                                        loading="lazy"
+                                        className="h-auto w-full"
+                                    />
+                                </div>
+                            )}
+                            <div className="prose-cms max-w-3xl">
                                 {project.body && <div dangerouslySetInnerHTML={{ __html: project.body }} />}
                                 {project.policy_reference && (
                                     <>
@@ -449,71 +386,6 @@ export default function Show({ project, related }: { project: Project; related: 
                                 )}
                             </div>
                         </div>
-                    </Container>
-                </section>
-            )}
-
-            {/* materials */}
-            {project.materials.length > 0 && (
-                <section className="border-t border-line bg-surface">
-                    <Container className="py-12">
-                        <SectionHeading>Санал ирүүлэхэд шаардагдах материалын жагсаалт</SectionHeading>
-                        <p className="-mt-4 mb-5 text-[0.8rem] text-ink-soft">
-                            <span className="text-accent">*</span> тэмдэгтэй материалыг заавал бүрдүүлнэ.
-                            {project.status === 'open_for_proposals' && ' Бэлэн болсны дараа доорх хэсэгт хавсаргаж илгээнэ үү.'}
-                        </p>
-                        <div className="overflow-x-auto rounded-card border border-line">
-                            <table className="w-full min-w-[640px] border-collapse text-left text-[0.82rem]">
-                                <thead>
-                                    <tr className="bg-brand-700 text-white">
-                                        <th className="w-12 px-4 py-3 text-center font-bold">№</th>
-                                        <th className="px-4 py-3 font-bold">Материалын нэр</th>
-                                        <th className="px-4 py-3 font-bold">Бүрдүүлэх агуулга</th>
-                                        <th className="w-28 px-4 py-3 text-center font-bold">Загвар</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {project.materials.map((m, i) => (
-                                        <tr key={i} className="border-t border-line odd:bg-surface-sunken/40">
-                                            <td className="px-4 py-3 text-center text-ink-soft">{i + 1}</td>
-                                            <td className="px-4 py-3 font-bold text-ink">
-                                                {m.name}
-                                                {m.is_required && <span className="ml-1 text-accent">*</span>}
-                                            </td>
-                                            <td className="px-4 py-3 text-ink-soft">{m.description || '—'}</td>
-                                            <td className="px-4 py-3 text-center">
-                                                {m.template_url ? (
-                                                    <a
-                                                        href={m.template_url}
-                                                        className="inline-flex items-center gap-1 text-[0.72rem] font-bold uppercase tracking-wide text-brand-600 hover:text-accent"
-                                                    >
-                                                        <i className="bi bi-download" /> Татах
-                                                    </a>
-                                                ) : m.external_url ? (
-                                                    <a
-                                                        href={m.external_url}
-                                                        target="_blank"
-                                                        rel="noopener"
-                                                        className="inline-flex items-center gap-1 text-[0.72rem] font-bold uppercase tracking-wide text-brand-600 hover:text-accent"
-                                                    >
-                                                        <i className="bi bi-box-arrow-up-right" /> Бөглөх
-                                                    </a>
-                                                ) : (
-                                                    <span className="text-ink-soft">-</span>
-                                                )}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        {project.status === 'open_for_proposals' && (
-                            <div className="mt-5">
-                                <ButtonLink href="#proposal" variant="primary">
-                                    Материалаа бэлдсэн <i className="bi bi-arrow-down-circle-fill" />
-                                </ButtonLink>
-                            </div>
-                        )}
                     </Container>
                 </section>
             )}

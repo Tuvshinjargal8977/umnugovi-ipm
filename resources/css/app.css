@@ -130,6 +130,16 @@
 .prose-cms a { @apply text-link underline underline-offset-2; }
 .prose-cms ul { @apply list-disc pl-5 flex flex-col gap-1; }
 .prose-cms ol { @apply list-decimal pl-5 flex flex-col gap-1; }
+/* dangerouslySetInnerHTML-ээр шууд оруулсан HTML-ийн p/ul/ol хоорондын зай
+   (эдгээр нь .prose-cms-ийн шууд хүүхэд биш нэг div дотор байрлах тул
+   дээрх flex gap-3 тэдгээрт хамаарахгүй). */
+.prose-cms p + p,
+.prose-cms p + ul,
+.prose-cms p + ol,
+.prose-cms ul + p,
+.prose-cms ol + p {
+    @apply mt-3;
+}
 .prose-cms hr { @apply my-5 border-line; }
 .prose-cms img { @apply rounded-lg max-w-full; }
 .prose-cms blockquote { @apply border-l-4 border-brand-200 pl-4 italic text-ink-soft; }

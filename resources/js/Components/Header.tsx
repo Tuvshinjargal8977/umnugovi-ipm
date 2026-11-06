@@ -118,7 +118,7 @@ export default function Header() {
             {/* main nav */}
             <nav aria-label="Үндсэн цэс" className="hidden border-t border-white/10 bg-brand-900 xl:block">
                 <Container>
-                    <ul className="flex justify-center">
+                    <ul className="flex justify-between">
                         {nav.map((item) => {
                             const active = isActive(item.url) || item.children?.some((c) => isActive(c.url));
                             return (
